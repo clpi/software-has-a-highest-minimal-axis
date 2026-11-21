@@ -1,0 +1,61 @@
+Lean (version 4.19.0, x86_64-unknown-linux-gnu, commit 6caaee842e94, Release)
+'Hma.filterlenmono' depends on axioms: [propext, Quot.sound]
+'Hma.filterlenstrict' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Hma.summmono' depends on axioms: [propext, Quot.sound]
+'Hma.sumstrict' depends on axioms: [propext, Quot.sound]
+'Hma.filtercongr' depends on axioms: [propext]
+'Hma.subsetrefl' does not depend on any axioms
+'Hma.subsettrans' does not depend on any axioms
+'Hma.subsetall' does not depend on any axioms
+'Hma.agreeoffmono' does not depend on any axioms
+'Hma.livemono' does not depend on any axioms
+'Hma.livemem' depends on axioms: [propext]
+'Hma.engagedmono' depends on axioms: [propext]
+'Hma.mumono' depends on axioms: [propext, Quot.sound]
+'Hma.lammmono' depends on axioms: [propext, Quot.sound]
+'Hma.cardle' depends on axioms: [propext]
+'Hma.lamle' depends on axioms: [propext]
+'Hma.filternil' depends on axioms: [propext]
+'Hma.mapcongr' depends on axioms: [propext]
+'Hma.mapsumzero' depends on axioms: [propext]
+'Hma.cardstrict' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Hma.engagedofsufficient' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Hma.engagedlistofsufficient' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Hma.filtermemsublists' depends on axioms: [propext, Quot.sound]
+'Hma.subsetrep' depends on axioms: [propext, Quot.sound]
+'Hma.minimalexists' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Hma.highestfromminimal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Hma.highestexists' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Hma.highestproper' depends on axioms: [propext, Quot.sound]
+'Hma.highestmax' depends on axioms: [propext]
+'Hma.highestunique' depends on axioms: [propext, Quot.sound]
+'Hma.variationcomp' does not depend on any axioms
+'Hma.variationrefl' does not depend on any axioms
+'Hma.transid' does not depend on any axioms
+'Hma.transcomp' does not depend on any axioms
+'Hma.highestengaged' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Hma.degenerate' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Hma.emptyoronehighest' depends on axioms: [propext, Quot.sound]
+'Hma.mueqofliveeq' depends on axioms: [propext]
+'Hma.deadremovesufficient' depends on axioms: [propext]
+'Hma.deadnotminimal' depends on axioms: [propext]
+'Hma.livelistsubset' depends on axioms: [propext]
+'Hma.monotone' depends on axioms: [propext, Quot.sound]
+'Ctl.sublists012' depends on axioms: [propext]
+'Ctl.xvalues' depends on axioms: [propext]
+'Ctl.xlives' depends on axioms: [propext]
+'Ctl.xaminimal' depends on axioms: [propext, Quot.sound]
+'Ctl.xcminimal' depends on axioms: [propext, Quot.sound]
+'Ctl.xahighest' depends on axioms: [propext, Quot.sound]
+'Ctl.xcdeadandminimal' depends on axioms: [propext, Quot.sound]
+'Ctl.xcnothighest' depends on axioms: [propext, Quot.sound]
+'Ctl.xdeadnotminimal' depends on axioms: [propext]
+'Ctl.dvalues' depends on axioms: [propext]
+'Ctl.dnoproper' depends on axioms: [propext, Quot.sound]
+'Ctl.danswer' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Ctl.dfullhighest' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Ctl.evalues' depends on axioms: [propext]
+'Ctl.eonehighest' depends on axioms: [propext, Quot.sound]
+'Ctl.etwohighest' depends on axioms: [propext, Quot.sound]
+Axiom subset check passed: printed axioms are a subset of {propext, Classical.choice, Quot.sound}
+Axioms printed: Classical.choice Quot.sound propext 
