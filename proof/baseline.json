@@ -1,0 +1,206 @@
+{
+  "commit": "63d9d3fdce1f81c81cd5cda2bd9850b0c1494646",
+  "source_sha256": {
+    "proof/Controls.lean": "f431a1541b9d34be1fdce23efdfe036c90bb77236c82f86ed4b521fbd801e327",
+    "proof/Hma.lean": "1a737519a2e496d1d7d192ca9022f8ba695be892a3855b3afc438c380db085c6"
+  },
+  "theorems": {
+    "Ctl.danswer": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Ctl.dfullhighest": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Ctl.dnoproper": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Ctl.dvalues": [
+      "propext"
+    ],
+    "Ctl.eonehighest": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Ctl.etwohighest": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Ctl.evalues": [
+      "propext"
+    ],
+    "Ctl.sublists012": [
+      "propext"
+    ],
+    "Ctl.xahighest": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Ctl.xaminimal": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Ctl.xcdeadandminimal": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Ctl.xcminimal": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Ctl.xcnothighest": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Ctl.xdeadnotminimal": [
+      "propext"
+    ],
+    "Ctl.xlives": [
+      "propext"
+    ],
+    "Ctl.xvalues": [
+      "propext"
+    ],
+    "Hma.agreeoffmono": [],
+    "Hma.cardle": [
+      "propext"
+    ],
+    "Hma.cardstrict": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Hma.deadnotminimal": [
+      "propext"
+    ],
+    "Hma.deadremovesufficient": [
+      "propext"
+    ],
+    "Hma.degenerate": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Hma.emptyoronehighest": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Hma.engagedlistofsufficient": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Hma.engagedmono": [
+      "propext"
+    ],
+    "Hma.engagedofsufficient": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Hma.filtercongr": [
+      "propext"
+    ],
+    "Hma.filterlenmono": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Hma.filterlenstrict": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Hma.filtermemsublists": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Hma.filternil": [
+      "propext"
+    ],
+    "Hma.highestengaged": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Hma.highestexists": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Hma.highestfromminimal": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Hma.highestmax": [
+      "propext"
+    ],
+    "Hma.highestproper": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Hma.highestunique": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Hma.lamle": [
+      "propext"
+    ],
+    "Hma.lammmono": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Hma.livelistsubset": [
+      "propext"
+    ],
+    "Hma.livemem": [
+      "propext"
+    ],
+    "Hma.livemono": [],
+    "Hma.mapcongr": [
+      "propext"
+    ],
+    "Hma.mapsumzero": [
+      "propext"
+    ],
+    "Hma.minimalexists": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Hma.monotone": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Hma.mueqofliveeq": [
+      "propext"
+    ],
+    "Hma.mumono": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Hma.subsetall": [],
+    "Hma.subsetrefl": [],
+    "Hma.subsetrep": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Hma.subsettrans": [],
+    "Hma.summmono": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Hma.sumstrict": [
+      "Quot.sound",
+      "propext"
+    ],
+    "Hma.transcomp": [],
+    "Hma.transid": [],
+    "Hma.variationcomp": [],
+    "Hma.variationrefl": []
+  }
+}

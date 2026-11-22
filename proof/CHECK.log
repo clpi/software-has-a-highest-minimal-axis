@@ -1,61 +1,104 @@
 Lean (version 4.19.0, x86_64-unknown-linux-gnu, commit 6caaee842e94, Release)
-'Hma.filterlenmono' depends on axioms: [propext, Quot.sound]
-'Hma.filterlenstrict' depends on axioms: [propext, Classical.choice, Quot.sound]
-'Hma.summmono' depends on axioms: [propext, Quot.sound]
-'Hma.sumstrict' depends on axioms: [propext, Quot.sound]
-'Hma.filtercongr' depends on axioms: [propext]
-'Hma.subsetrefl' does not depend on any axioms
-'Hma.subsettrans' does not depend on any axioms
-'Hma.subsetall' does not depend on any axioms
-'Hma.agreeoffmono' does not depend on any axioms
-'Hma.livemono' does not depend on any axioms
-'Hma.livemem' depends on axioms: [propext]
-'Hma.engagedmono' depends on axioms: [propext]
-'Hma.mumono' depends on axioms: [propext, Quot.sound]
-'Hma.lammmono' depends on axioms: [propext, Quot.sound]
-'Hma.cardle' depends on axioms: [propext]
-'Hma.lamle' depends on axioms: [propext]
-'Hma.filternil' depends on axioms: [propext]
-'Hma.mapcongr' depends on axioms: [propext]
-'Hma.mapsumzero' depends on axioms: [propext]
-'Hma.cardstrict' depends on axioms: [propext, Classical.choice, Quot.sound]
-'Hma.engagedofsufficient' depends on axioms: [propext, Classical.choice, Quot.sound]
-'Hma.engagedlistofsufficient' depends on axioms: [propext, Classical.choice, Quot.sound]
-'Hma.filtermemsublists' depends on axioms: [propext, Quot.sound]
-'Hma.subsetrep' depends on axioms: [propext, Quot.sound]
-'Hma.minimalexists' depends on axioms: [propext, Classical.choice, Quot.sound]
-'Hma.highestfromminimal' depends on axioms: [propext, Classical.choice, Quot.sound]
-'Hma.highestexists' depends on axioms: [propext, Classical.choice, Quot.sound]
-'Hma.highestproper' depends on axioms: [propext, Quot.sound]
-'Hma.highestmax' depends on axioms: [propext]
-'Hma.highestunique' depends on axioms: [propext, Quot.sound]
-'Hma.variationcomp' does not depend on any axioms
-'Hma.variationrefl' does not depend on any axioms
-'Hma.transid' does not depend on any axioms
-'Hma.transcomp' does not depend on any axioms
-'Hma.highestengaged' depends on axioms: [propext, Classical.choice, Quot.sound]
-'Hma.degenerate' depends on axioms: [propext, Classical.choice, Quot.sound]
-'Hma.emptyoronehighest' depends on axioms: [propext, Quot.sound]
-'Hma.mueqofliveeq' depends on axioms: [propext]
-'Hma.deadremovesufficient' depends on axioms: [propext]
-'Hma.deadnotminimal' depends on axioms: [propext]
-'Hma.livelistsubset' depends on axioms: [propext]
-'Hma.monotone' depends on axioms: [propext, Quot.sound]
-'Ctl.sublists012' depends on axioms: [propext]
-'Ctl.xvalues' depends on axioms: [propext]
-'Ctl.xlives' depends on axioms: [propext]
-'Ctl.xaminimal' depends on axioms: [propext, Quot.sound]
-'Ctl.xcminimal' depends on axioms: [propext, Quot.sound]
-'Ctl.xahighest' depends on axioms: [propext, Quot.sound]
-'Ctl.xcdeadandminimal' depends on axioms: [propext, Quot.sound]
-'Ctl.xcnothighest' depends on axioms: [propext, Quot.sound]
-'Ctl.xdeadnotminimal' depends on axioms: [propext]
-'Ctl.dvalues' depends on axioms: [propext]
-'Ctl.dnoproper' depends on axioms: [propext, Quot.sound]
+Gate input sha256: 04939ca23cb7dba1367e5750bdbdaadff46e8a33d1c679ab2b839f4cfee2a4ea
+Source coverage: 4 Lean files; 63 theorem/lemma declarations; escape scan PASS
+Cold compilation: PASS (every Lean source; warnings as errors; isolated import path)
 'Ctl.danswer' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Ctl.dfullhighest' depends on axioms: [propext, Classical.choice, Quot.sound]
-'Ctl.evalues' depends on axioms: [propext]
+'Ctl.dnoproper' depends on axioms: [propext, Quot.sound]
+'Ctl.dvalues' depends on axioms: [propext]
 'Ctl.eonehighest' depends on axioms: [propext, Quot.sound]
 'Ctl.etwohighest' depends on axioms: [propext, Quot.sound]
-Axiom subset check passed: printed axioms are a subset of {propext, Classical.choice, Quot.sound}
-Axioms printed: Classical.choice Quot.sound propext 
+'Ctl.evalues' depends on axioms: [propext]
+'Ctl.sublists012' depends on axioms: [propext]
+'Ctl.xahighest' depends on axioms: [propext, Quot.sound]
+'Ctl.xaminimal' depends on axioms: [propext, Quot.sound]
+'Ctl.xcdeadandminimal' depends on axioms: [propext, Quot.sound]
+'Ctl.xcminimal' depends on axioms: [propext, Quot.sound]
+'Ctl.xcnothighest' depends on axioms: [propext, Quot.sound]
+'Ctl.xdeadnotminimal' depends on axioms: [propext]
+'Ctl.xlives' depends on axioms: [propext]
+'Ctl.xvalues' depends on axioms: [propext]
+'Hma.agreeoffmono' does not depend on any axioms
+'Hma.cardle' depends on axioms: [propext]
+'Hma.cardstrict' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Hma.deadnotminimal' depends on axioms: [propext]
+'Hma.deadremovesufficient' depends on axioms: [propext]
+'Hma.degenerate' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Hma.emptyoronehighest' depends on axioms: [propext, Quot.sound]
+'Hma.engagedlistofsufficient' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Hma.engagedmono' depends on axioms: [propext]
+'Hma.engagedofsufficient' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Hma.filtercongr' depends on axioms: [propext]
+'Hma.filterlenmono' depends on axioms: [propext, Quot.sound]
+'Hma.filterlenstrict' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Hma.filtermemsublists' depends on axioms: [propext, Quot.sound]
+'Hma.filternil' depends on axioms: [propext]
+'Hma.highestengaged' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Hma.highestexists' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Hma.highestfromminimal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Hma.highestmax' depends on axioms: [propext]
+'Hma.highestproper' depends on axioms: [propext, Quot.sound]
+'Hma.highestunique' depends on axioms: [propext, Quot.sound]
+'Hma.lamle' depends on axioms: [propext]
+'Hma.lammmono' depends on axioms: [propext, Quot.sound]
+'Hma.livelistsubset' depends on axioms: [propext]
+'Hma.livemem' depends on axioms: [propext]
+'Hma.livemono' does not depend on any axioms
+'Hma.mapcongr' depends on axioms: [propext]
+'Hma.mapsumzero' depends on axioms: [propext]
+'Hma.minimalexists' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Hma.monotone' depends on axioms: [propext, Quot.sound]
+'Hma.mueqofliveeq' depends on axioms: [propext]
+'Hma.mumono' depends on axioms: [propext, Quot.sound]
+'Hma.subsetall' does not depend on any axioms
+'Hma.subsetrefl' does not depend on any axioms
+'Hma.subsetrep' depends on axioms: [propext, Quot.sound]
+'Hma.subsettrans' does not depend on any axioms
+'Hma.summmono' depends on axioms: [propext, Quot.sound]
+'Hma.sumstrict' depends on axioms: [propext, Quot.sound]
+'Hma.transcomp' does not depend on any axioms
+'Hma.transid' does not depend on any axioms
+'Hma.variationcomp' does not depend on any axioms
+'Hma.variationrefl' does not depend on any axioms
+'HmaCheck.snapshotEdges' depends on axioms: [propext]
+'HmaCheck.snapshotLive' depends on axioms: [propext]
+'HmaCheck.snapshotMeasure' depends on axioms: [propext, Quot.sound]
+'HmaCheck.tableHighestIff' depends on axioms: [propext, Quot.sound]
+'HmaCheck.tableMinimalIff' depends on axioms: [propext, Quot.sound]
+Original proof baseline: PASS (58/58; Hma.lean and Controls.lean byte-identical; per-theorem axioms unchanged)
+Axiom subset check: PASS (63/63; subset of {propext, Classical.choice, Quot.sound})
+Environment audit: PASS (122 theorem constants including 59 generated helpers; zero custom logical axioms)
+Compiler metadata: 38 generated unsafe placeholders; none in theorem dependencies
+GATE ATTACK CONTROL: PASS (unused metaprogram-generated logical axiom rejected)
+ARENA SOURCE PASS: 1152 rows; compact bytes match; original observation SHA256 d8719eba53bd3f0143a37597f6c1c555b6c8042adadf987890347041c2bcb865; lossless interning checked
+INSTANCE D: PASS; subsets=8; rows=2; chosen=['a', 'b', 'c']; rho=[1, 2]; minimal=['a', 'b', 'c']:[1, 2]
+  Lean definitions=AGREE; deterministic bytes=EXACT (2 processes); declaration order=INVARIANT; output sha256=35c3bfe00bf219a945921ee431eaafa919c54f8bce5ad285821a69294eab1ded
+  Checker execution=Lean interpreter; finite-instance runtime check
+  Original Controls.lean instance=D: exact contract/behavior AGREEMENT
+INSTANCE E-empty: PASS; subsets=8; rows=0; chosen=[]; rho=[0, 0]; minimal=[]:[0, 0]
+  Lean definitions=AGREE; deterministic bytes=EXACT (2 processes); declaration order=INVARIANT; output sha256=38c53593af3b54bf97fc4547578b19372a93c9a0c73ca5e79ec08bf9076ecd07
+  Checker execution=Lean interpreter; finite-instance runtime check
+  Original Controls.lean instance=E-empty: exact contract/behavior AGREEMENT
+INSTANCE E-singleton: PASS; subsets=8; rows=1; chosen=[]; rho=[0, 0]; minimal=[]:[0, 0]
+  Lean definitions=AGREE; deterministic bytes=EXACT (2 processes); declaration order=INVARIANT; output sha256=9b0d2c81dfb0ceb3b844a0b1bf601ebcb71439b18362aace3361f9124331c6ed
+  Checker execution=Lean interpreter; finite-instance runtime check
+  Original Controls.lean instance=E-singleton: exact contract/behavior AGREEMENT
+INSTANCE X: PASS; subsets=8; rows=8; chosen=['a']; rho=[1, 3]; minimal=['a']:[1, 3]; ['c']:[1, 2]
+  Lean definitions=AGREE; deterministic bytes=EXACT (2 processes); declaration order=INVARIANT; output sha256=d2bafd9d8fec45fae71956f9a49f5ca13a91fed1df819e829a052784998e0607
+  Checker execution=Lean interpreter; finite-instance runtime check
+  Original Controls.lean instance=X: exact contract/behavior AGREEMENT
+INSTANCE arena: PASS; subsets=256; rows=1152; chosen=['count']; rho=[4, 5]; minimal=['count']:[4, 5]; ['material']:[4, 5]; ['motion']:[4, 5]; ['place']:[4, 5]
+  Lean definitions=AGREE; deterministic bytes=EXACT (2 processes); declaration order=INVARIANT; output sha256=eea8fc527c498a300edaa76fcdcd76fc66aebf8b56554b16a4142870bfc9914b
+  Checker execution=compiled Lean executable; finite-instance runtime check
+INSTANCE empty-universe: PASS; subsets=1; rows=1; chosen=[]; rho=[0, 0]; minimal=[]:[0, 0]
+  Lean definitions=AGREE; deterministic bytes=EXACT (2 processes); declaration order=INVARIANT; output sha256=2ab953219767e8b261cea66aa8f33378db6dc0742be5699f6622470e1b34e6c1
+  Checker execution=Lean interpreter; finite-instance runtime check
+INSTANCE tie: PASS; subsets=8; rows=8; chosen=['a', 'b']; rho=[1, 2]; minimal=['a', 'b']:[1, 2]; ['c']:[1, 2]
+  Lean definitions=AGREE; deterministic bytes=EXACT (2 processes); declaration order=INVARIANT; output sha256=73be70e6bd8c20b79c2ad1ad47a365c4b528bb938c0409c13e522e637cf48f8d
+  Checker execution=Lean interpreter; finite-instance runtime check
+INSTANCE typed-weighted: PASS; subsets=4; rows=8; chosen=['a', 'b']; rho=[5, 3]; minimal=['a', 'b']:[5, 3]
+  Lean definitions=AGREE; deterministic bytes=EXACT (2 processes); declaration order=INVARIANT; output sha256=a47ba9dceaaec29c935024ad9d0c7d0c77cd85e0be8fde5eb938045566ad60c5
+  Checker execution=Lean interpreter; finite-instance runtime check
+REJECTION CONTROLS: PASS (20 corrupted outputs; 21 malformed inputs rejected by both decoders)
+SOLVER GATE PASS: 8 instances; every subset checked against imported Lean definitions; recorded bytes current
+GATE PASS: proof baseline, Lean-definition agreement, complete outputs, and byte-exact determinism

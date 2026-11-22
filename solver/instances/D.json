@@ -1,0 +1,64 @@
+{
+  "schema": 1,
+  "name": "D",
+  "axes": [
+    {
+      "name": "a",
+      "values": [
+        false,
+        true
+      ]
+    },
+    {
+      "name": "b",
+      "values": [
+        false,
+        true
+      ]
+    },
+    {
+      "name": "c",
+      "values": [
+        false,
+        true
+      ]
+    }
+  ],
+  "components": [
+    "p",
+    "q"
+  ],
+  "contract": [
+    {
+      "axes": [
+        false,
+        false,
+        false
+      ],
+      "behavior": [
+        false,
+        false
+      ]
+    },
+    {
+      "axes": [
+        true,
+        true,
+        true
+      ],
+      "behavior": [
+        true,
+        true
+      ]
+    }
+  ],
+  "hyperedges": [
+    {
+      "components": [
+        "p",
+        "q"
+      ],
+      "weight": 1
+    }
+  ]
+}

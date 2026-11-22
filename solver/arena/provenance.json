@@ -1,0 +1,99 @@
+{
+  "repository": "clpi/idol-sites",
+  "pin": "545eccb3ac605b1246a731bbd609a50d9afdf716",
+  "path": "muse/frontier-before-weights/index.html",
+  "source_sha256": "493207f8c6a6cab2220c91f220b0716a0493ea36492775ab631d363490460ff8",
+  "seed": 11,
+  "period": 8,
+  "extracts": [
+    {
+      "start": "function mulberry(seed)",
+      "end": null,
+      "sha256": "cfcd50d5cddb2519d7bf9fcdc7aeaf79e5a83307a81c7a1661807e790d89c084",
+      "start_line": 1292,
+      "end_line": 1293
+    },
+    {
+      "start": "function cloneState(s)",
+      "end": "/* ---- \u00a706 parametric axes:",
+      "sha256": "cd243b9d6ed380b5a8c04b87f74ba6396b625702278861003c59122c6a2739db",
+      "start_line": 1392,
+      "end_line": 1403
+    },
+    {
+      "start": "var MATS={",
+      "end": "var ROAD={",
+      "sha256": "b16e97a0497ffa59f0a1b75d78fe53d4883bcce01c10f85ddf8b1c4654169227",
+      "start_line": 1409,
+      "end_line": 1417
+    },
+    {
+      "start": "var PK={",
+      "end": null,
+      "sha256": "791602dbf5753bb6d2d12a561ca659857379912edbaa332a66ff424321fb4087",
+      "start_line": 1423,
+      "end_line": 1424
+    },
+    {
+      "start": "function planScore(c, W)",
+      "end": "function selectPlan(cands)",
+      "sha256": "19e17486fea64e2efb758d79963d4527b52a68cad3ed3dfb4313ce1dcb65fb8c",
+      "start_line": 1437,
+      "end_line": 1443
+    },
+    {
+      "start": "function mkSteps(start, edges, posOf)",
+      "end": "function rr(ctx",
+      "sha256": "a0a383aebe8dfa6a1691f507aa305b2e9603c5a7b9df547156bba29c92213c81",
+      "start_line": 1444,
+      "end_line": 1487
+    },
+    {
+      "start": "function platOff(b, t, period)",
+      "end": null,
+      "sha256": "839391861913563a58bfec4fa9f6182335f18e59c815626e34f2cac4dc3fe22c",
+      "start_line": 1496,
+      "end_line": 1497
+    },
+    {
+      "start": "function platCells(st)",
+      "end": "/* ---- drive scenario ----",
+      "sha256": "288c385bff14336e2d90abf1b9eafcb4271fa36e1606a81344b000295a4024e5",
+      "start_line": 1498,
+      "end_line": 1557
+    },
+    {
+      "start": "var SCEN={",
+      "end": "    describe:function(st)",
+      "sha256": "6a40bf4685068f27f372b93b2bcd7fbf6a4f85648c8516003eeb6eba6a0122e1",
+      "start_line": 1582,
+      "end_line": 1614
+    },
+    {
+      "start": "var HMA_AXES=",
+      "end": "function hmaCmpNames(a, b)",
+      "sha256": "c2ca1aba3b538b1ffee92863494fd7830ef6c3ed92ac7a9d0160cf9d48be45ac",
+      "start_line": 2019,
+      "end_line": 2152
+    }
+  ],
+  "note": "Verbatim pure source extracts with only SCEN record closing and CommonJS export added. HMA was first present in e2a168b456d4f05e72af62fb462305bc0a7a4385, and those HMA functions are identical to this pin. The unshared coordinator artifact was not recovered.",
+  "source_git_blob": "06e822d8cad9c46eaca4d63bba075c1609dd43ef",
+  "model_sha256": "7f5a31a61de49ff458755cb2437b8c5ca3fa0bf3e6f480909fdc14483c96b6fb",
+  "fixture_sha256": "d2fbd732762a5f1402242563a8f3c14732fcd5a94734c2f02c457d0cbeff4ad5",
+  "raw_table_sha256": "d8719eba53bd3f0143a37597f6c1c555b6c8042adadf987890347041c2bcb865",
+  "raw_table_bytes": 21799529,
+  "rows": 1152,
+  "axes": 8,
+  "components": 5,
+  "hyperedges": 4,
+  "component_values": {
+    "layout": 38,
+    "successors": 36,
+    "plan": 25,
+    "selection": 40,
+    "execution": 18
+  },
+  "axis_encoding": "Nonintegral numeric axis values 0.4, 0.05, 0.5 are relabeled to their decimal strings; all other axis labels retain original JSON types. This is injective within every axis.",
+  "behavior_encoding": "Each component independently interns its exact original strings using sorted unique values. No hash is used for equality. --dictionary exports the complete inverse map."
+}

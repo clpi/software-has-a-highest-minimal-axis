@@ -3,10 +3,10 @@
 A qualified parametric system — named axes, a contract of
 allowed configurations, a behavior function on finite
 components, and a hypergraph joining the components —
-always has a highest minimal axis vector: a smallest axis
+always has a highest minimal axis vector: an inclusion-minimal axis
 set whose variation inside the contract already produces
 the full emergent live interacting structure, and among
-those smallest sets one whose refinement vector
+those minimal sets one whose refinement vector
 (mu, lambda), emergence first and live count second, is
 maximal. The induced transformation from variations of
 that minimal vector to behavior variations loses no
@@ -30,7 +30,21 @@ engaged hyperedge.
   The family gate: proof/check.sh, cold, Lean 4.19.0,
   warnings as errors, escape scan, dependency audit
   inside {propext, Classical.choice, Quot.sound}. Gate
-  verdict at founding: PASS (proof/CHECK.log).
+  verdict at founding: PASS. The original 58 theorem sources and their
+  per-theorem axiom sets are retained by the current gate.
+- solver/ — a deterministic executable implementation of SPEC.md section 7,
+  an independent decoder and Lean-definition checker, X/D/E fixtures, and the
+  recovered 1,152-row arena instance. The solver returns the chosen vector,
+  every minimal vector, per-axis dispositions, and every subset's measurements.
+  It is an **implementation checked against the proved definitions**, not a
+  new theorem establishing correctness of the Python program for all inputs.
+- proof/FiniteCheck.lean — five additional bridge lemmas equating executable
+  finite-table views with the existing `Hma` definitions. These support the
+  checker; they do not prove the external solver or decoder correct.
+- [solver/README.md](solver/README.md) — input/output contract, commands,
+  checking mechanism, results, and the not-landed / cannot-say list.
+- [solver/arena/README.md](solver/arena/README.md) — exact source pin,
+  reproducible arena extraction, and lossless table encoding.
 
 ## Headline results
 
@@ -71,15 +85,28 @@ engaged hyperedge.
 
 ## Gate
 
-Run cold from the proof directory, with the pinned
-Lean 4.19.0 on the path:
+Run from the repository root with Lean 4.19.0, Python 3.10 or newer,
+and Node.js on the path:
 
-    cd proof
-    LEAN=lean sh check.sh
+    LEAN=lean sh proof/check.sh
 
-The gate rejects every proof escape token in every Lean
-file, compiles with warnings as errors, and audits the
-printed foundational principles of all 58 theorems
-against the allowed set {propext, Classical.choice,
-Quot.sound}. Founding verdict: PASS; the run is recorded
-in proof/CHECK.log.
+The gate cold-compiles every Lean file in the repository with warnings as
+errors, audits the original 58 theorems and the five checker bridges, checks
+the arena's source/table correspondence, compares every solver result with
+Lean's definitions, and compares two independent solver runs byte for byte.
+Wrong outputs, incomplete results, stale recorded outputs, malformed input,
+missing tools, or checker failures reject the run. GitHub Actions runs the same
+gate. The current receipt is [proof/CHECK.log](proof/CHECK.log); complete
+per-instance outputs are in [solver/results](solver/results).
+
+For example:
+
+```sh
+python3 solver/solve.py solver/instances/X.json
+python3 solver/solve.py solver/instances/arena.json
+```
+
+The arena selects `{count}`, with `rho = (4,5)`. Its full minimal list is
+`{count}`, `{material}`, `{motion}`, `{place}`, all with the same `rho`.
+The name-order tie break chooses `{count}`. Inclusion minimality does not mean
+minimum cardinality: the `tie` control deliberately chooses `{a,b}` over `{c}`.
