@@ -25,3 +25,11 @@ Lean, over ../../proof/Hma.lean unchanged: agreeoff_iff_diff, join_live,
 scoped_live, witness_mono, scoped_rho, delete_live, scoped_delete,
 survives_of_witness, scoped_rho_delete. This file sits outside proof/ so
 proof/check.sh and its pinned theorem counts are untouched.
+
+Randomized check: `python3 -B solver/incremental/fuzz/fuzz_s3.py solver`
+builds random tables (2 to 4 axes, 2 to 4 components, random edges) and runs
+random sequences of join batches, refused batches, withdrawals and changed
+cells, comparing the engine with solver.solve after every operation on a
+reference table built from the script's own record of the contract. 300
+tables x 100 operations, 0 disagreements; it catches the refused-batch bug
+and the superset mutant.
