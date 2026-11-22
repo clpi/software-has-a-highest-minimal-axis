@@ -1,0 +1,23 @@
+{
+  "format": "hma-table-v1",
+  "name": "X",
+  "axes": [
+    {"name": "a", "values": [false, true]},
+    {"name": "b", "values": [false, true]},
+    {"name": "c", "values": [false, true]}
+  ],
+  "components": ["p", "q", "r", "s"],
+  "contract": [
+    {"configuration": {"a": false, "b": false, "c": false}, "behavior": {"p": false, "q": false, "r": false, "s": false}},
+    {"configuration": {"a": false, "b": false, "c": true},  "behavior": {"p": true,  "q": true,  "r": false, "s": false}},
+    {"configuration": {"a": false, "b": true,  "c": false}, "behavior": {"p": false, "q": false, "r": true,  "s": false}},
+    {"configuration": {"a": false, "b": true,  "c": true},  "behavior": {"p": true,  "q": true,  "r": true,  "s": false}},
+    {"configuration": {"a": true,  "b": false, "c": false}, "behavior": {"p": true,  "q": true,  "r": false, "s": true}},
+    {"configuration": {"a": true,  "b": false, "c": true},  "behavior": {"p": false, "q": false, "r": false, "s": true}},
+    {"configuration": {"a": true,  "b": true,  "c": false}, "behavior": {"p": true,  "q": true,  "r": true,  "s": true}},
+    {"configuration": {"a": true,  "b": true,  "c": true},  "behavior": {"p": false, "q": false, "r": true,  "s": true}}
+  ],
+  "edges": [
+    {"components": ["p", "q"], "weight": 1}
+  ]
+}

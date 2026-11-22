@@ -8,11 +8,22 @@
 set -eu
 cd "$(dirname "$0")"
 LEAN="${LEAN:-lean}"
-export LEAN_PATH=".:${LEAN_PATH:-}"
 LOG="CHECK.log"
 : > "$LOG"
+TMPD="$(mktemp -d)"
+trap 'rm -rf "$TMPD"' EXIT HUP INT TERM
+export LEAN_PATH="$TMPD:.:${LEAN_PATH:-}"
 
 FILES="$(find . -name '*.lean' | sort)"
+HMA_THEOREMS="$(grep -c '^theorem ' Hma.lean || true)"
+CONTROL_THEOREMS="$(grep -c '^theorem ' Controls.lean || true)"
+TOTAL_THEOREMS="$(grep -h '^theorem ' $FILES | wc -l | tr -d ' ')"
+if [ "$HMA_THEOREMS" -ne 42 ] || [ "$CONTROL_THEOREMS" -ne 16 ] || [ "$TOTAL_THEOREMS" -ne 58 ]; then
+  echo "Rejected: theorem count changed (Hma=$HMA_THEOREMS, Controls=$CONTROL_THEOREMS, total=$TOTAL_THEOREMS; expected 42, 16, 58)" >> "$LOG"
+  cat "$LOG" >&2
+  exit 1
+fi
+echo "Theorem count preserved: Hma=$HMA_THEOREMS, Controls=$CONTROL_THEOREMS, total=$TOTAL_THEOREMS" >> "$LOG"
 if grep -En '(^|[^[:alnum:]_])(sorry|admit|axiom|native_decide|implemented_by|extern|unsafe|opaque|partial)([^[:alnum:]_]|$)' $FILES; then
   echo "Rejected prohibited proof escape hatch" >> "$LOG"
   cat "$LOG" >&2
@@ -21,8 +32,6 @@ fi
 
 "$LEAN" --version >> "$LOG" 2>&1
 
-TMPD="$(mktemp -d)"
-trap 'rm -rf "$TMPD"' EXIT HUP INT TERM
 REMAINING="$FILES"
 PASSES=0
 while [ -n "$REMAINING" ]; do
@@ -36,7 +45,7 @@ while [ -n "$REMAINING" ]; do
   PROGRESS=0
   for f in $REMAINING; do
     base="$(basename "$f" .lean)"
-    if "$LEAN" -DwarningAsError=true -o "$base.olean" "$f" > "$TMPD/out" 2>&1; then
+    if "$LEAN" -DwarningAsError=true -o "$TMPD/$base.olean" "$f" > "$TMPD/out" 2>&1; then
       cat "$TMPD/out" >> "$LOG"
       PROGRESS=1
     else
@@ -77,4 +86,11 @@ for a in $USED; do
 done
 echo "Axiom subset check passed: printed axioms are a subset of {propext, Classical.choice, Quot.sound}" >> "$LOG"
 echo "Axioms printed: $(echo $USED | tr '\n' ' ')" >> "$LOG"
+if python3 -B ../solver/validate.py --lean "$LEAN" --proof-dir "$TMPD" >> "$LOG" 2>&1; then
+  echo "Solver-to-Lean agreement and byte-exact determinism checks passed" >> "$LOG"
+else
+  echo "Rejected: solver validation failed closed" >> "$LOG"
+  cat "$LOG"
+  exit 1
+fi
 cat "$LOG"

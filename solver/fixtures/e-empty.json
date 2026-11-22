@@ -1,0 +1,14 @@
+{
+  "format": "hma-table-v1",
+  "name": "E-empty",
+  "axes": [
+    {"name": "a", "values": [0, 1]},
+    {"name": "b", "values": [0, 1]},
+    {"name": "c", "values": [0, 1]}
+  ],
+  "components": ["p", "q"],
+  "contract": [],
+  "edges": [
+    {"components": ["p", "q"], "weight": 1}
+  ]
+}
