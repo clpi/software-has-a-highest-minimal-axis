@@ -117,4 +117,72 @@ theorem scoped_rho (I : Inst A V B W) (N : List (A → V)) (S : A → Bool)
     · rw [if_pos (this.mpr he), if_pos he]; rfl
     · rw [if_neg (fun h' => he (this.mp h')), if_neg he]
 
+/-! ### Deletions: alternate supports and the conservative cone -/
+
+/-- The instance with the rows failing `keep` withdrawn. -/
+def dropI (I : Inst A V B W) (keep : (A → V) → Bool) : Inst A V B W :=
+  { I with contract := I.contract.filter keep }
+
+/-- Deletion rule: after a withdrawal, b is live in S exactly when some
+    witness pair survives. Alternate supports count; nothing else does. -/
+theorem delete_live (I : Inst A V B W) (keep : (A → V) → Bool) (b : B) (S : A → Bool) :
+    live (dropI I keep) b S ↔
+      ∃ x ∈ I.contract, keep x = true ∧ ∃ x' ∈ I.contract, keep x' = true ∧ witness I b S x x' := by
+  constructor
+  · rintro ⟨x, hx, x', hx', hw⟩
+    have hx2 := List.mem_filter.mp hx
+    have hx2' := List.mem_filter.mp hx'
+    exact ⟨x, hx2.1, hx2.2, x', hx2'.1, hx2'.2, hw⟩
+  · rintro ⟨x, hx, hk, x', hx', hk', hw⟩
+    exact ⟨x, List.mem_filter.mpr ⟨hx, hk⟩, x', List.mem_filter.mpr ⟨hx', hk'⟩, hw⟩
+
+/-- Conservative cone for deletions: if no witness pair for b in S
+    touches a withdrawn row, b's liveness in S is unchanged. -/
+theorem scoped_delete (I : Inst A V B W) (keep : (A → V) → Bool) (b : B) (S : A → Bool)
+    (h : ∀ x ∈ I.contract, ∀ x' ∈ I.contract, witness I b S x x' →
+      keep x = true ∧ keep x' = true) :
+    live (dropI I keep) b S ↔ live I b S := by
+  rw [delete_live]
+  constructor
+  · rintro ⟨x, hx, _, x', hx', _, hw⟩
+    exact ⟨x, hx, x', hx', hw⟩
+  · rintro ⟨x, hx, x', hx', hw⟩
+    have hk := h x hx x' hx' hw
+    exact ⟨x, hx, hk.1, x', hx', hk.2, hw⟩
+
+/-- Overdelete is unsound without rederive: a withdrawn row's support
+    being lost does not make b dead while another witness survives
+    (delete_live's right side). Stated as the support-count condition:
+    with one surviving witness, b stays live. -/
+theorem survives_of_witness (I : Inst A V B W) (keep : (A → V) → Bool) {b : B} {S : A → Bool}
+    {x x' : A → V} (hx : x ∈ I.contract) (hx' : x' ∈ I.contract)
+    (hk : keep x = true) (hk' : keep x' = true) (hw : witness I b S x x') :
+    live (dropI I keep) b S :=
+  (delete_live I keep b S).mpr ⟨x, hx, hk, x', hx', hk', hw⟩
+
+/-- Scoped re-measure after a withdrawal: unchanged liveness gives the
+    carried live list, lambda and mu. -/
+theorem scoped_rho_delete (I : Inst A V B W) (keep : (A → V) → Bool) (S : A → Bool)
+    (h : ∀ b, live (dropI I keep) b S ↔ live I b S) :
+    livelist (dropI I keep) S = livelist I S ∧
+      lam (dropI I keep) S = lam I S ∧ mu (dropI I keep) S = mu I S := by
+  have hl : livelist (dropI I keep) S = livelist I S := by
+    unfold livelist
+    apply filtercongr
+    intro b _
+    exact decide_eq_decide.mpr (h b)
+  refine ⟨hl, ?_, ?_⟩
+  · unfold lam; rw [hl]
+  · unfold mu
+    congr 1
+    apply List.map_congr_left
+    intro e _
+    have : engaged (dropI I keep) S e ↔ engaged I S e := by
+      unfold engaged
+      rw [hl]
+      rfl
+    by_cases he : engaged I S e
+    · rw [if_pos (this.mpr he), if_pos he]; rfl
+    · rw [if_neg (fun h' => he (this.mp h')), if_neg he]
+
 end HmaJoin

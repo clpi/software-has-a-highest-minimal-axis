@@ -59,6 +59,8 @@ class AxisEngine:
         self.rows = []          # (config tuple of canonical values, behavior tuple of canonical)
         self.raw_rows = []      # model.Row objects, for building the checker's table
         self.dc = {}            # difference mask -> frozenset of components
+        self.cnt = {}           # (mask, component) -> number of supporting pairs
+        self.pairs_released = 0
         self.live = {S: frozenset() for S in range(1 << self.n)}
         self.measure = {S: self._measure(frozenset()) for S in range(1 << self.n)}
         self.pairs_computed = 0
@@ -98,6 +100,8 @@ class AxisEngine:
                     if cfg[i] != ocfg[i]:
                         mask |= 1 << i
                 comps = frozenset(k for k in range(len(beh)) if beh[k] != obeh[k])
+                for k in comps:
+                    self.cnt[(mask, k)] = self.cnt.get((mask, k), 0) + 1
                 new = comps - self.dc.get(mask, frozenset())
                 if new:
                     self.dc[mask] = self.dc.get(mask, frozenset()) | new
@@ -116,6 +120,58 @@ class AxisEngine:
         for S in self.remeasured:
             self.measure[S] = self._measure(self.live[S])
         return self.pairs_computed - before, len(self.remeasured)
+
+    def withdraw(self, configurations, count_mutant=False):
+        """Remove contract rows by configuration (dicts axis -> value).
+
+        Deletion keeps every alternate support: a component leaves dc[m]
+        only when its support count (pairs with difference set m that
+        distinguish it) reaches zero. Each subset containing such an m has
+        its live set rebuilt from the carried dc table (no pair rescan).
+        There are no cycles: liveness is one non-recursive layer over
+        pairs, so counting is complete. count_mutant drops a component at
+        its first lost support (overdelete with no rederive).
+        Returns (pairs released, subsets re-measured)."""
+        c = self.model.canonical
+        gone = {tuple(c(cfg[a]) for a in self.axis_names) for cfg in configurations}
+        idx = [i for i, r in enumerate(self.rows) if r[0] in gone]
+        if len(idx) != len(gone):
+            raise NotAJoin("withdrawal of a configuration that is not in the contract")
+        before = self.pairs_released
+        self.remeasured = set()
+        shrunk = set()
+        removed = set(idx)
+        for i in idx:
+            cfg, beh = self.rows[i]
+            for j, (ocfg, obeh) in enumerate(self.rows):
+                if j == i or (j in removed and j < i):
+                    continue  # each pair released once
+                self.pairs_released += 1
+                mask = 0
+                for a in range(self.n):
+                    if cfg[a] != ocfg[a]:
+                        mask |= 1 << a
+                for k in range(len(beh)):
+                    if beh[k] != obeh[k]:
+                        self.cnt[(mask, k)] -= 1
+                        if count_mutant:
+                            self.cnt[(mask, k)] = 0  # MUTANT: alternate supports ignored
+                        if self.cnt[(mask, k)] == 0:
+                            self.dc[mask] = self.dc.get(mask, frozenset()) - {k}
+                            shrunk.add(mask)
+        self.rows = [r for i, r in enumerate(self.rows) if i not in removed]
+        self.raw_rows = [r for i, r in enumerate(self.raw_rows) if i not in removed]
+        for S in range(1 << self.n):
+            if not any(S & m == m for m in shrunk):
+                continue  # outside every shrunk difference set's cone
+            live = frozenset().union(*[d for m, d in self.dc.items() if S & m == m]) \
+                if self.dc else frozenset()
+            if live != self.live[S]:
+                self.live[S] = live
+                self.remeasured.add(S)
+        for S in self.remeasured:
+            self.measure[S] = self._measure(self.live[S])
+        return self.pairs_released - before, len(self.remeasured)
 
     def result(self):
         """Selection re-derived from carried per-subset measures, in the
