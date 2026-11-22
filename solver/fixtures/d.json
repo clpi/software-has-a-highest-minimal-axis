@@ -1,0 +1,17 @@
+{
+  "format": "hma-table-v1",
+  "name": "D",
+  "axes": [
+    {"name": "a", "values": [0, 1]},
+    {"name": "b", "values": [0, 1]},
+    {"name": "c", "values": [0, 1]}
+  ],
+  "components": ["p", "q"],
+  "contract": [
+    {"configuration": {"a": 0, "b": 0, "c": 0}, "behavior": {"p": 0, "q": 0}},
+    {"configuration": {"a": 1, "b": 1, "c": 1}, "behavior": {"p": 1, "q": 1}}
+  ],
+  "edges": [
+    {"components": ["p", "q"], "weight": 1}
+  ]
+}
