@@ -137,6 +137,17 @@ def main() -> int:
         require(set(baseline["source_sha256"]) == {"proof/Hma.lean", "proof/Controls.lean"}, "Incomplete original-source baseline")
         for path, digest in baseline["source_sha256"].items():
             require(hashlib.sha256((ROOT / path).read_bytes()).hexdigest() == digest, f"Baseline proof source changed: {path}")
+        upstream = json.loads((ROOT / "proof/upstream.json").read_text())
+        require(upstream["repository"] == "clpi/software-optimality" and
+                upstream["commit"] == "0bbc1f3b8aa38afe17e02ccbd7ddd0e7722b3cb0" and
+                upstream["toolchain"] == "leanprover/lean4:v4.19.0", "Unexpected hypergraph source pin")
+        require(set(upstream["files"]) == {"Qualification.lean", "FiniteFrontier.lean",
+                "ExecutableClosure.lean", "HypergraphIncremental.lean"}, "Incomplete hypergraph import closure")
+        for filename, entry in upstream["files"].items():
+            require(entry["source_path"] == filename and hashlib.sha256(
+                    (ROOT / "proof" / filename).read_bytes()).hexdigest() == entry["sha256"],
+                    "Pinned hypergraph module changed: " + filename)
+        emit("Hypergraph source pin: PASS (4 byte-identical modules at software-optimality@0bbc1f3b8aa3)")
         sources = sorted(path for path in ROOT.rglob("*.lean") if ".git" not in path.relative_to(ROOT).parts)
         require(bool(sources), "No Lean source files")
         census: dict[str, Path] = {}
@@ -208,13 +219,20 @@ def main() -> int:
             emit(f"Compiler metadata: {len(actual['compiler_placeholders'])} generated unsafe placeholders; none in theorem dependencies")
             environment.attack_selftest(lean, env)
             emit("GATE ATTACK CONTROL: PASS (unused metaprogram-generated logical axiom rejected)")
-            command = [sys.executable, str(ROOT / "solver/check.py")]
-            with subprocess.Popen(command, cwd=ROOT, env=env, text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, bufsize=1) as process:
-                require(process.stdout is not None, "Missing validation output stream")
-                for line in process.stdout:
-                    emit(line.rstrip("\n"))
-                require(process.wait() == 0, "Solver validation gate failed")
-        emit("GATE PASS: proof baseline, Lean-definition agreement, complete outputs, and byte-exact determinism")
+            commands = [
+                [sys.executable, str(ROOT / "solver/check.py")],
+                [sys.executable, str(ROOT / "solver/validate.py"), "--lean", lean, "--proof-dir", str(build)],
+                [sys.executable, str(ROOT / "solver/incremental_check.py")],
+            ]
+            for command in commands:
+                with subprocess.Popen(command, cwd=ROOT, env=env, text=True, stdout=subprocess.PIPE,
+                                      stderr=subprocess.STDOUT, bufsize=1) as process:
+                    require(process.stdout is not None, "Missing validation output stream")
+                    for line in process.stdout:
+                        emit(line.rstrip("\n"))
+                    require(process.wait() == 0, "Solver validation gate failed: " + Path(command[1]).name)
+
+        emit("GATE PASS: original proof baseline, hypergraph and incremental proofs, Lean outcomes at every campaign prefix, reconstruction and suffix replay, cumulative work, exponential controls, and byte-exact determinism")
         return 0
     except (RuntimeError, OSError, ValueError, subprocess.SubprocessError) as error:
         emit("REJECTED: " + str(error))

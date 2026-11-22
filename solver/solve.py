@@ -184,15 +184,38 @@ def solve(instance: Any) -> dict[str, Any]:
             if mask & bit:
                 live_masks[mask] |= live_masks[mask ^ bit]
 
-    edge_masks = [sum(1 << i for i in edge["components"]) for edge in encoded["hyperedges"]]
+    return result_from_live_masks(data, live_masks)
+
+
+def result_from_live_masks(instance: Any, live_masks: list[int]) -> dict[str, Any]:
+    """Render the complete finite result from an already computed liveness table.
+
+    This shared output routine performs no row-pair search. The batch and
+    incremental algorithms supply their independently maintained live masks.
+    Rendering the explicit subset table and minimal list still costs exponential
+    space/output in the number of axes; incrementality does not remove that cost.
+    """
+    data = normalize(instance)
+    names = [axis["name"] for axis in data["axes"]]
+    comps = data["components"]
+    rows = data["contract"]
+    count = 1 << len(names)
+    full = count - 1
+    require(type(live_masks) is list and len(live_masks) == count,
+            "liveness table: incomplete subset coverage")
+    require(all(type(mask) is int and 0 <= mask < (1 << len(comps))
+                for mask in live_masks), "liveness table: invalid component mask")
+    comp_ids = {name: i for i, name in enumerate(comps)}
+    edge_masks = [sum(1 << comp_ids[name] for name in edge["components"])
+                  for edge in data["hyperedges"]]
     engaged_ids: list[list[int]] = []
     mu: list[int] = []
     lam = [mask.bit_count() for mask in live_masks]
     for live_mask in live_masks:
-        engaged = [i for i, edge in enumerate(encoded["hyperedges"])
+        engaged = [i for i, edge in enumerate(data["hyperedges"])
                    if len(edge["components"]) >= 2 and edge_masks[i] & live_mask == edge_masks[i]]
         engaged_ids.append(engaged)
-        mu.append(sum(encoded["hyperedges"][i]["weight"] for i in engaged))
+        mu.append(sum(data["hyperedges"][i]["weight"] for i in engaged))
     sufficient = [value == mu[full] for value in mu]
 
     # Monotonicity makes one-axis deletions enough: any sufficient proper

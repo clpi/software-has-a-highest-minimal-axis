@@ -51,6 +51,42 @@ The full repository gate always builds those modules afresh. `--control X`,
 with the original `Ctl` instance. The temporary build can be discarded after
 the check.
 
+## Incremental use and the existing interface
+
+`incremental.py` accepts a strict JSON campaign with `schema: 1`, an `initial`
+instance (or checkpoint), and `events`. Each event supplies the next contiguous
+`seq`, current schema `epoch`, an `op`, and its operation's payload. For example,
+starting from an empty contract with the corresponding domains:
+
+```json
+{"seq":1,"epoch":0,"op":"append","rows":[{"axes":[false],"behavior":[false,false]}]}
+```
+
+The operations are `append` / `replace` with `rows`, `remove` with `axes`
+(configuration vectors), `edges` with `hyperedges`, and `rebase` with `instance`.
+Event vectors use **sorted current axis/component names**, as exposed by
+`Incremental.instance()`. A rebase advances the epoch and fully reconstructs
+witness state. Stale sequence numbers or epochs reject before mutation.
+
+Run `python3 solver/incremental.py campaign.json` to emit complete observations
+at every prefix, work receipts, and a compact checkpoint. The Python API provides
+`Incremental`, `apply`, `observe`, `checkpoint`, `restore`, and `replay`.
+[INCREMENTAL-MODEL.md](INCREMENTAL-MODEL.md) describes the formal guarantees and
+checked implementation boundary. The full gate always runs incremental checks.
+
+The `hma-table-v1` / `hma-result-v1` entry point merged on main remains supported:
+
+```sh
+python3 solver/solver.py solver/fixtures/x.json
+```
+
+`model.py` retains its named-column parser. `compat.py` maps legacy JSON values
+to injective canonical string labels, then maps the shared engine's result back
+to the existing field names and ordering. There is one computation engine.
+`validate.py` retains the X/D/E concrete Lean certificates and checks the arena
+through the imported definitions. The authoritative arena fixture lives once
+at `instances/arena.json`; the earlier missing-arena blocker is resolved.
+
 ## Table format
 
 Inputs have exactly these fields:
@@ -176,11 +212,11 @@ original statements. The checker separately evaluates `Hma.dead` for each
 axis. Python only maps checked identifiers back to names, applies the specified
 name-order tie break, and assembles the required output schema.
 
-Tables of at most 32 rows use Lean's interpreter. Larger tables use an ordinary
-executable produced by the pinned Lean compiler and `leanc` from the same
+Tables above 32 rows, or with at least eight axes and more than four rows,
+use an ordinary executable produced by the pinned Lean compiler and `leanc` from the same
 `Hma`, checker bridge, and generated instance source. There is no hand-written
 C semantic implementation or proof tactic that trusts native evaluation.
-Both paths are runtime checks. The decoder deterministically interleaves rows
+Other tables use Lean's interpreter. Both paths are runtime checks. The decoder deterministically interleaves rows
 from different behavior groups to expose existential witnesses earlier; all
 contract rows are retained, and the declared contract is a set. The generated
 behavior lookup preserves exact table equality.
@@ -243,12 +279,13 @@ byte before passing it to the same solver/checker used for X/D/E.
   explicit finite table format described above. There is no deferred X, D,
   empty/singleton E, or arena check in the gate.
 - The solver is **checked executable code**, not a theorem of correctness for
-  every possible input. The five additional theorems prove checker views
-  equivalent to the existing definitions, not the Python algorithm, JSON
+  every possible input. The checker bridges and incremental/hypergraph/counting
+  proofs establish model facts, not correctness of the Python algorithm, JSON
   decoders, serializer, Lean compiler/runtime, C compiler, or operating system.
 - The finite-instance agreement run is a runtime check. It is not presented
   as a new kernel proof certificate for the entire arena result. The existing
-  58 theorems and the five bridge lemmas are kernel-checked proofs.
+  58 theorems, the checker bridges, and the incremental/hypergraph/counting
+  results are kernel-checked proofs.
 - The coordinator file named in the ticket was unavailable. The arena was
   recovered reproducibly from the published source pin; byte identity with
   the unseen coordinator artifact is not claimed.
@@ -267,3 +304,16 @@ byte before passing it to the same solver/checker used for X/D/E.
 - These are proposed repository changes until the pull request is merged.
   A green recorded local gate and a green hosted CI run are separate receipts;
   neither substitutes for the other.
+
+- Incremental checkpoints preserve current inputs and replay boundaries. They
+  do not authenticate fabricated historical observations or work counters and
+  do not recover a discarded prefix without an earlier checkpoint/events or
+  equivalent reconstruction source.
+- Mixed row insertion/withdrawal has a fixed-semantics model proof. Runtime
+  behavior replacement, edge edits and schema rebases are checked against
+  newly constructed Lean instances; the Python transition code is not proved.
+- The ordered sequence adapter rejects duplicate delivery. It does not implement
+  the family's separate admission protocol for distributed idempotent merges.
+- Pair/support counters are exact for measured operations, not total CPU cost.
+  Schema rebases and checkpoint restoration rebuild; full output rendering is
+  exponential in the axis count. Restoration work is reported separately.

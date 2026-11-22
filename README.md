@@ -91,9 +91,15 @@ and Node.js on the path:
     LEAN=lean sh proof/check.sh
 
 The gate cold-compiles every Lean file in the repository with warnings as
-errors, audits the original 58 theorems and the five checker bridges, checks
+errors, audits the unchanged original 58 theorems and every added proof, checks
 the arena's source/table correspondence, compares every solver result with
-Lean's definitions, and compares two independent solver runs byte for byte.
+Lean's definitions, checks incremental outputs at every campaign prefix, restores
+checkpoints and replays their suffixes, and compares two independent processes
+byte for byte for each original and restored campaign. Four upstream hypergraph
+modules are verified against their recorded pin and digests. The complete
+minimal list can be exponentially large; `proof/Exponential.lean` proves an
+actual HMA family with `2k` axes, `2k+1` distinct rows, and exactly `2^k` highest
+minimal vectors.
 Wrong outputs, incomplete results, stale recorded outputs, malformed input,
 missing tools, or checker failures reject the run. GitHub Actions runs the same
 gate. The current receipt is [proof/CHECK.log](proof/CHECK.log); complete
@@ -110,3 +116,28 @@ The arena selects `{count}`, with `rho = (4,5)`. Its full minimal list is
 `{count}`, `{material}`, `{motion}`, `{place}`, all with the same `rho`.
 The name-order tie break chooses `{count}`. Inclusion minimality does not mean
 minimum cardinality: the `tie` control deliberately chooses `{a,b}` over `{c}`.
+
+## Incremental reconstruction and replay
+
+`solver/incremental.py` maintains pair-witness multiplicities and updates only
+the superset cones whose support becomes present or absent. It supports row
+append, withdrawal, atomic behavior replacement, edge/weight edits, and explicit
+schema rebases. It retains current input and derived support counts, with no
+stored event history or individual pair records. Checkpoints keep current input,
+sequence/epoch boundaries, and work counters; restoration reconstructs the caches.
+Historical metadata is retained only when needed to reconstruct or replay a
+promised observation. A compact checkpoint does not promise discarded-prefix replay.
+
+The imported family hypergraph closure is connected directly to `Hma.live` and
+`Hma.engaged` in `proof/HmaGraph.lean`. `proof/Incremental.lean` proves row-witness
+cache preservation, mixed insertion/withdrawal prefixes, replay composition,
+checkpoint suffix equivalence, and sequence fencing in the mathematical model.
+`proof/IncrementalCounts.lean` proves exact subset, affected-cone and cumulative
+pair counts. The Python implementation remains checked against those definitions;
+it is not universally proved by these mathematical results.
+
+See [solver/INCREMENTAL-MODEL.md](solver/INCREMENTAL-MODEL.md) for exact theorem
+boundaries, costs, compaction, and empirical validation, and
+[solver/VALIDATION.md](solver/VALIDATION.md) for the delivered checks and limitations.
+The previously merged `hma-table-v1` CLI remains available through
+`python3 solver/solver.py solver/fixtures/x.json`; it adapts to the same solver.

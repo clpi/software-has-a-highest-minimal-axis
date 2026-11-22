@@ -1,6 +1,7 @@
 Lean (version 4.19.0, x86_64-unknown-linux-gnu, commit 6caaee842e94, Release)
-Gate input sha256: 04939ca23cb7dba1367e5750bdbdaadff46e8a33d1c679ab2b839f4cfee2a4ea
-Source coverage: 4 Lean files; 63 theorem/lemma declarations; escape scan PASS
+Gate input sha256: 6daec41a8b209060d9f3170ba5d65e40278d35ebb3ff90046fa4e435dda431d5
+Hypergraph source pin: PASS (4 byte-identical modules at software-optimality@0bbc1f3b8aa3)
+Source coverage: 12 Lean files; 207 theorem/lemma declarations; escape scan PASS
 Cold compilation: PASS (every Lean source; warnings as errors; isolated import path)
 'Ctl.danswer' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Ctl.dfullhighest' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -18,6 +19,26 @@ Cold compilation: PASS (every Lean source; warnings as errors; isolated import p
 'Ctl.xdeadnotminimal' depends on axioms: [propext]
 'Ctl.xlives' depends on axioms: [propext]
 'Ctl.xvalues' depends on axioms: [propext]
+'ExecutableClosure.boundedOK_exact' depends on axioms: [propext, Quot.sound]
+'ExecutableClosure.checkedClose_admitted' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ExecutableClosure.checkedClose_rejects' depends on axioms: [propext, Quot.sound]
+'ExecutableClosure.close_contains_roots' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ExecutableClosure.close_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ExecutableClosure.close_is_closed' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ExecutableClosure.close_order_independent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ExecutableClosure.executable_monotone' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ExecutableClosure.filter_member' depends on axioms: [propext, Quot.sound]
+'ExecutableClosure.modelOK_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ExecutableClosure.ruleOK_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ExecutableClosure.subset_members' depends on axioms: [propext, Quot.sound]
+'ExecutableClosure.subsets_count' depends on axioms: [propext]
+'FiniteFrontier.certificate_exact' depends on axioms: [propext, Quot.sound]
+'FiniteFrontier.certified_coverage' depends on axioms: [propext, Quot.sound]
+'FiniteFrontier.certified_frontier' depends on axioms: [propext, Quot.sound]
+'FiniteFrontier.conflict_exact' does not depend on any axioms
+'FiniteFrontier.frontier_exact' depends on axioms: [propext, Quot.sound]
+'FiniteFrontier.pareto_exact' depends on axioms: [propext, Quot.sound]
+'FiniteFrontier.unknown_exact' does not depend on any axioms
 'Hma.agreeoffmono' does not depend on any axioms
 'Hma.cardle' depends on axioms: [propext]
 'Hma.cardstrict' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -65,10 +86,134 @@ Cold compilation: PASS (every Lean source; warnings as errors; isolated import p
 'HmaCheck.snapshotMeasure' depends on axioms: [propext, Quot.sound]
 'HmaCheck.tableHighestIff' depends on axioms: [propext, Quot.sound]
 'HmaCheck.tableMinimalIff' depends on axioms: [propext, Quot.sound]
+'HmaExponential.axes_complete' depends on axioms: [propext]
+'HmaExponential.axes_length' depends on axioms: [propext, Quot.sound]
+'HmaExponential.axes_nodup' depends on axioms: [propext, Quot.sound]
+'HmaExponential.choose_covers' depends on axioms: [propext]
+'HmaExponential.choose_highest' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HmaExponential.choose_injective' depends on axioms: [propext, Quot.sound]
+'HmaExponential.choose_minimal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HmaExponential.contract_length' depends on axioms: [propext, Quot.sound]
+'HmaExponential.contract_nodup' depends on axioms: [propext, Quot.sound]
+'HmaExponential.exponential_minimal_family' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HmaExponential.functions_complete' depends on axioms: [propext, Quot.sound]
+'HmaExponential.functions_length' depends on axioms: [propext, Quot.sound]
+'HmaExponential.functions_nodup' depends on axioms: [propext, Quot.sound]
+'HmaExponential.highest_iff_mem_minima' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HmaExponential.live_iff_hits' depends on axioms: [propext, Quot.sound]
+'HmaExponential.live_of_covers' depends on axioms: [propext, Quot.sound]
+'HmaExponential.minima_length' depends on axioms: [propext, Quot.sound]
+'HmaExponential.minima_nodup' depends on axioms: [propext, Quot.sound]
+'HmaExponential.minimal_iff_mem_minima' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HmaExponential.minimal_is_choice' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HmaExponential.ofFn_nodup' depends on axioms: [propext, Quot.sound]
+'HmaExponential.sufficient_iff_covers' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HmaExponential.unitRow_injective' depends on axioms: [propext]
+'HmaGraph.axis_exact' depends on axioms: [propext, Quot.sound]
+'HmaGraph.derives_meaning' depends on axioms: [propext, Quot.sound]
+'HmaGraph.differences_selected' depends on axioms: [propext]
+'HmaGraph.incremental_interaction_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HmaGraph.incremental_live_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HmaGraph.incremental_projection_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HmaGraph.interaction_exact' depends on axioms: [propext, Quot.sound]
+'HmaGraph.live_exact' depends on axioms: [propext, Quot.sound]
+'HmaGraph.occupiedCount_hypergraph_exact' depends on axioms: [propext, Quot.sound]
+'HmaGraph.reconstructed_dead' depends on axioms: [propext]
+'HmaGraph.reconstructed_engaged' depends on axioms: [propext, Quot.sound]
+'HmaGraph.reconstructed_highest' depends on axioms: [propext, Quot.sound]
+'HmaGraph.reconstructed_incremental_live' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HmaGraph.reconstructed_live' does not depend on any axioms
+'HmaGraph.reconstructed_livelist' depends on axioms: [propext]
+'HmaGraph.reconstructed_minimal' depends on axioms: [propext, Quot.sound]
+'HmaGraph.reconstructed_mu' depends on axioms: [propext, Quot.sound]
+'HmaGraph.reconstructed_rho' depends on axioms: [propext, Quot.sound]
+'HmaGraph.reconstructs_symm' does not depend on any axioms
+'HmaGraph.row_exact' depends on axioms: [propext, Quot.sound]
+'HmaGraph.supportCount_hypergraph_exact' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.accepted_sequence_advances' depends on axioms: [propext]
+'HmaIncremental.appendRow_valid' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.binaryChoices_complete' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.binaryChoices_length' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.binaryChoices_member_length' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.binaryChoices_nodup' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.checkpoint_mixed_replay' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.checkpoint_numbered_replay' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.checkpoint_replay' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.cone_covers' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.cone_length' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.cone_nodup' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.cone_sound' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.configEq_true_iff' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.cumulativePairs_twice' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.dead_congr' depends on axioms: [propext]
+'HmaIncremental.difference_iff_agreeoff' depends on axioms: [propext]
+'HmaIncremental.every_prefix_exact' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.exactCount_add_row' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.filter_partition_length' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.highest_congr' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.live_add_row' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HmaIncremental.livelist_congr' depends on axioms: [propext]
+'HmaIncremental.minimal_congr' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.mixed_every_prefix_exact' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.occupiedCount_positive_iff' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.occupied_ignores_positive_multiplicity' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.outside_difference_unchanged' depends on axioms: [propext]
+'HmaIncremental.pairChanges_decide_symm' depends on axioms: [propext]
+'HmaIncremental.pairChanges_irrefl' does not depend on any axioms
+'HmaIncremental.pairChanges_symm' does not depend on any axioms
+'HmaIncremental.pair_delta_exact' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.pairs_cover' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.pairs_length' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.reconstruct_valid' does not depend on any axioms
+'HmaIncremental.removeConfig_decompose' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.removeRow_valid' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.replayEvents_valid' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.replayRows_append' does not depend on any axioms
+'HmaIncremental.replayRows_valid' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.rho_congr' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.rowStep_valid' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.snapshot_congr' depends on axioms: [propext]
+'HmaIncremental.sublists_length' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.sublists_mem_ext' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.sublists_member_subset' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.sublists_nodup' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.subset_functions_nodup' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.sufficient_congr' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.supportCount_add_row' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.supportCount_positive_iff' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.supportCount_remove_middle' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.supportCount_remove_row' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.valid_reconstruct_eq' depends on axioms: [propext, Quot.sound]
+'HmaIncremental.wrong_sequence_rejected' depends on axioms: [propext]
+'HypergraphIncremental.affected_symm' does not depend on any axioms
+'HypergraphIncremental.executable_full_agrees' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HypergraphIncremental.graphOfRecords_edge_exact' does not depend on any axioms
+'HypergraphIncremental.incidence_row_unchanged' depends on axioms: [propext]
+'HypergraphIncremental.incrementalFrontier_exact' depends on axioms: [propext, Quot.sound]
+'HypergraphIncremental.incremental_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HypergraphIncremental.interaction_is_derived' does not depend on any axioms
+'HypergraphIncremental.matrix_bit_update_exact' depends on axioms: [propext]
+'HypergraphIncremental.matrix_update_exact' depends on axioms: [propext]
+'HypergraphIncremental.patchedDominance_exact' does not depend on any axioms
+'HypergraphIncremental.patchedInteraction_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HypergraphIncremental.qualified_frontier_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HypergraphIncremental.retracted_cycles_do_not_bootstrap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HypergraphIncremental.unaffected_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HypergraphIncremental.unchanged_derivation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Qualification.closed' does not depend on any axioms
+'Qualification.compounding' does not depend on any axioms
+'Qualification.idempotent' does not depend on any axioms
+'Qualification.least' does not depend on any axioms
+'Qualification.monotone' does not depend on any axioms
+'Qualification.no_bootstrap' does not depend on any axioms
+'Qualification.order_independent' does not depend on any axioms
+'Qualification.soundness' does not depend on any axioms
+'Qualification.surviving_subsystem' does not depend on any axioms
+'Qualification.withdrawal_no_new_support' does not depend on any axioms
 Original proof baseline: PASS (58/58; Hma.lean and Controls.lean byte-identical; per-theorem axioms unchanged)
-Axiom subset check: PASS (63/63; subset of {propext, Classical.choice, Quot.sound})
-Environment audit: PASS (122 theorem constants including 59 generated helpers; zero custom logical axioms)
-Compiler metadata: 38 generated unsafe placeholders; none in theorem dependencies
+Axiom subset check: PASS (207/207; subset of {propext, Classical.choice, Quot.sound})
+Environment audit: PASS (445 theorem constants including 238 generated helpers; zero custom logical axioms)
+Compiler metadata: 81 generated unsafe placeholders; none in theorem dependencies
 GATE ATTACK CONTROL: PASS (unused metaprogram-generated logical axiom rejected)
 ARENA SOURCE PASS: 1152 rows; compact bytes match; original observation SHA256 d8719eba53bd3f0143a37597f6c1c555b6c8042adadf987890347041c2bcb865; lossless interning checked
 INSTANCE D: PASS; subsets=8; rows=2; chosen=['a', 'b', 'c']; rho=[1, 2]; minimal=['a', 'b', 'c']:[1, 2]
@@ -101,4 +246,31 @@ INSTANCE typed-weighted: PASS; subsets=4; rows=8; chosen=['a', 'b']; rho=[5, 3];
   Checker execution=Lean interpreter; finite-instance runtime check
 REJECTION CONTROLS: PASS (20 corrupted outputs; 21 malformed inputs rejected by both decoders)
 SOLVER GATE PASS: 8 instances; every subset checked against imported Lean definitions; recorded bytes current
-GATE PASS: proof baseline, Lean-definition agreement, complete outputs, and byte-exact determinism
+PASS X: selected=['a'] rho=(1,3); minimal=[['a'] rho=(1,3), ['c'] rho=(1,2)]; Lean=Lean (version 4.19.0, x86_64-unknown-linux-gnu, commit 6caaee842e94, Release); determinism=BYTE-EXACT; independent brute force=PASS
+PASS D: selected=['a', 'b', 'c'] rho=(1,2); minimal=[['a', 'b', 'c'] rho=(1,2)]; Lean=Lean (version 4.19.0, x86_64-unknown-linux-gnu, commit 6caaee842e94, Release); determinism=BYTE-EXACT
+PASS E-empty: selected=[] rho=(0,0); minimal=[[] rho=(0,0)]; Lean=Lean (version 4.19.0, x86_64-unknown-linux-gnu, commit 6caaee842e94, Release); determinism=BYTE-EXACT
+PASS E-singleton: selected=[] rho=(0,0); minimal=[[] rho=(0,0)]; Lean=Lean (version 4.19.0, x86_64-unknown-linux-gnu, commit 6caaee842e94, Release); determinism=BYTE-EXACT
+PASS arena: selected=['count'] rho=(4,5); minimal=[['count'] rho=(4,5), ['material'] rho=(4,5), ['motion'] rho=(4,5), ['place'] rho=(4,5)]; Lean=4.19.0 (compiled definition evaluation); determinism=BYTE-EXACT
+SOLVER GATE: PASS (all named controls and arena; Lean agreement and byte-exact determinism checked)
+INCREMENTAL X: PASS; prefixes=17; all Lean outcomes=AGREE; checkpoint suffixes=17; process bytes=EXACT; cumulative pairs=70; retained events=0
+INCREMENTAL D: PASS; prefixes=5; all Lean outcomes=AGREE; checkpoint suffixes=5; process bytes=EXACT; cumulative pairs=3; retained events=0
+INCREMENTAL E-empty: PASS; prefixes=1; all Lean outcomes=AGREE; checkpoint suffixes=1; process bytes=EXACT; cumulative pairs=0; retained events=0
+INCREMENTAL E-singleton: PASS; prefixes=4; all Lean outcomes=AGREE; checkpoint suffixes=4; process bytes=EXACT; cumulative pairs=0; retained events=0
+  ARENA PREFIX 0: Lean=AGREE; rows=0; pairs this update=0; chosen=[]
+  ARENA PREFIX 1: Lean=AGREE; rows=1; pairs this update=0; chosen=[]
+  ARENA PREFIX 2: Lean=AGREE; rows=32; pairs this update=496; chosen=[]
+  ARENA PREFIX 3: Lean=AGREE; rows=1152; pairs this update=662480; chosen=['count']
+  ARENA PREFIX 4: Lean=AGREE; rows=1151; pairs this update=1151; chosen=['count']
+  ARENA PREFIX 5: Lean=AGREE; rows=1152; pairs this update=1151; chosen=['count']
+INCREMENTAL arena: PASS; prefixes=6; all Lean outcomes=AGREE; checkpoint suffixes=6; process bytes=EXACT; cumulative pairs=665278; retained events=0
+INCREMENTAL tie: PASS; prefixes=11; all Lean outcomes=AGREE; checkpoint suffixes=11; process bytes=EXACT; cumulative pairs=42; retained events=0
+INCREMENTAL typed-weighted: PASS; prefixes=11; all Lean outcomes=AGREE; checkpoint suffixes=11; process bytes=EXACT; cumulative pairs=42; retained events=0
+INCREMENTAL empty-universe: PASS; prefixes=4; all Lean outcomes=AGREE; checkpoint suffixes=4; process bytes=EXACT; cumulative pairs=0; retained events=0
+INCREMENTAL schema-rebase: PASS; prefixes=4; all Lean outcomes=AGREE; checkpoint suffixes=4; process bytes=EXACT; cumulative pairs=92; retained events=0
+INCREMENTAL mixed-36: PASS; prefixes=37; all Lean outcomes=AGREE; checkpoint suffixes=37; process bytes=EXACT; cumulative pairs=33; retained events=0
+INCREMENTAL exponential-1: PASS; prefixes=2; all Lean outcomes=AGREE; checkpoint suffixes=2; process bytes=EXACT; cumulative pairs=3; retained events=0
+INCREMENTAL exponential-2: PASS; prefixes=2; all Lean outcomes=AGREE; checkpoint suffixes=2; process bytes=EXACT; cumulative pairs=10; retained events=0
+INCREMENTAL exponential-3: PASS; prefixes=2; all Lean outcomes=AGREE; checkpoint suffixes=2; process bytes=EXACT; cumulative pairs=21; retained events=0
+INCREMENTAL exponential-4: PASS; prefixes=2; all Lean outcomes=AGREE; checkpoint suffixes=2; process bytes=EXACT; cumulative pairs=36; retained events=0
+INCREMENTAL GATE PASS: 14 campaigns; 108 prefixes; 91 distinct Lean inputs; reconstruction/suffix replay, rejected transactions, stale-support attacks, exact delta counts and exponential controls PASS
+GATE PASS: original proof baseline, hypergraph and incremental proofs, Lean outcomes at every campaign prefix, reconstruction and suffix replay, cumulative work, exponential controls, and byte-exact determinism

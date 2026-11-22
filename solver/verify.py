@@ -258,6 +258,11 @@ def main : IO Unit := do
 '''
 
 
+def uses_compiled_checker(axis_count: int, row_count: int) -> bool:
+    # Dense minimal/highest comparisons can dominate even a short contract.
+    return row_count > 32 or (axis_count >= 8 and row_count > 4)
+
+
 def lean_rows(data: dict[str, Any], *, build_dir: str | Path | None = None,
               lean: str | None = None, timeout: int = 600,
               control: str | None = None) -> list[dict[str, Any]]:
@@ -281,7 +286,7 @@ def lean_rows(data: dict[str, Any], *, build_dir: str | Path | None = None,
                  " ".join(command) + "\n" + process.stdout + process.stderr)
             return process
 
-        if len(data["rows"]) > 32:
+        if uses_compiled_checker(len(data["axes"]), len(data["rows"])):
             # This is ordinary execution of Lean-generated code, never a proof
             # tactic. The same definitions and bridge are used in both modes.
             prefix = run([executable, "--print-prefix"]).stdout.strip()

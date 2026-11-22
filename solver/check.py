@@ -165,7 +165,7 @@ def main() -> int:
                 minimal = "; ".join(str(row["axes"]) + ":" + str(row["rho"]) for row in actual["minimal"])
                 print(f"INSTANCE {path.stem}: PASS; subsets={actual['counts']['subsets']}; rows={actual['counts']['contract_rows']}; chosen={actual['chosen']['axes']}; rho={actual['chosen']['rho']}; minimal={minimal}", flush=True)
                 print(f"  Lean definitions=AGREE; deterministic bytes=EXACT (2 processes); declaration order=INVARIANT; output sha256={sha}", flush=True)
-                mode = "compiled Lean executable" if actual["counts"]["contract_rows"] > 32 else "Lean interpreter"
+                mode = "compiled Lean executable" if verify.uses_compiled_checker(actual["counts"]["axes"], actual["counts"]["contract_rows"]) else "Lean interpreter"
                 print(f"  Checker execution={mode}; finite-instance runtime check", flush=True)
                 if control:
                     print(f"  Original Controls.lean instance={control}: exact contract/behavior AGREEMENT", flush=True)

@@ -1,0 +1,23 @@
+{
+  "repository": "clpi/software-optimality",
+  "commit": "0bbc1f3b8aa38afe17e02ccbd7ddd0e7722b3cb0",
+  "toolchain": "leanprover/lean4:v4.19.0",
+  "files": {
+    "Qualification.lean": {
+      "source_path": "Qualification.lean",
+      "sha256": "a96ebcd998e1cd3703b9cc1fb6b3f2d73f6df8610bd0b34b3199afbb78f42f65"
+    },
+    "FiniteFrontier.lean": {
+      "source_path": "FiniteFrontier.lean",
+      "sha256": "eac31642af138ea2aa6c95abe256de3b16b5ae565c94e46ba94893692665696b"
+    },
+    "ExecutableClosure.lean": {
+      "source_path": "ExecutableClosure.lean",
+      "sha256": "fe533a245b11156be673649c880e12f2e9edb623534d7757f4ff6673f2b6796f"
+    },
+    "HypergraphIncremental.lean": {
+      "source_path": "HypergraphIncremental.lean",
+      "sha256": "57d63384979e1fc78cf5ec0fb8fb7d58a60a1e04d3a74eed966b8d9e36d24ee1"
+    }
+  }
+}
