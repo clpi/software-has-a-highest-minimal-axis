@@ -82,17 +82,24 @@ class AxisEngine:
 
     def join(self, new_rows):
         """Append contract rows. Returns (pairs computed, subsets re-measured)."""
-        before = self.pairs_computed
-        self.remeasured = set()
-        added = {}  # mask -> components newly added to dc[mask]
+        # Validate the whole batch before any carried state changes, so a
+        # refused join leaves the engine exactly as it was.
+        encoded = []
+        seen = {r[0]: r[1] for r in self.rows}
         for row in new_rows:
             cfg, beh = self._encode(row)
-            if any(cfg == r[0] for r in self.rows):
-                if any(cfg == r[0] and beh == r[1] for r in self.rows):
+            if cfg in seen:
+                if seen[cfg] == beh:
                     raise NotAJoin("duplicate row: not a join (the solver rejects it)")
                 raise NotAJoin("changed behavior at an existing configuration: "
                                "a withdrawal plus a join, invalidating every pair "
                                "touching that row; not handled as a join")
+            seen[cfg] = beh
+            encoded.append((row, cfg, beh))
+        before = self.pairs_computed
+        self.remeasured = set()
+        added = {}  # mask -> components newly added to dc[mask]
+        for row, cfg, beh in encoded:
             for ocfg, obeh in self.rows:
                 self.pairs_computed += 1
                 mask = 0
