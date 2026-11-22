@@ -57,5 +57,13 @@ Lean (version 4.19.0, x86_64-unknown-linux-gnu, commit 6caaee842e94, Release)
 'Ctl.evalues' depends on axioms: [propext]
 'Ctl.eonehighest' depends on axioms: [propext, Quot.sound]
 'Ctl.etwohighest' depends on axioms: [propext, Quot.sound]
+'Expect.engagedlisteq' depends on axioms: [propext]
+'Expect.mapifsum' depends on axioms: [propext]
+'Expect.musum' depends on axioms: [propext]
+'Expect.diffmem' depends on axioms: [propext]
+'Expect.suball' depends on axioms: [propext, Quot.sound]
+'Expect.agreeoffdiff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Expect.pairmem' depends on axioms: [propext, Quot.sound]
+'Expect.tablive' depends on axioms: [propext, Classical.choice, Quot.sound]
 Axiom subset check passed: printed axioms are a subset of {propext, Classical.choice, Quot.sound}
 Axioms printed: Classical.choice Quot.sound propext 

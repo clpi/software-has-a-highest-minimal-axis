@@ -1,0 +1,1 @@
+{"axes":[{"name":"a","values":[0,1]},{"name":"b","values":[0,1]},{"name":"c","values":[0,1]}],"behavior":{"p":[],"q":[]},"components":["p","q"],"contract":[],"hyperedges":[{"components":["p","q"],"weight":1}],"name":"Instance E (empty contract)"}

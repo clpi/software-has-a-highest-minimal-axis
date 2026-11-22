@@ -31,6 +31,16 @@ engaged hyperedge.
   warnings as errors, escape scan, dependency audit
   inside {propext, Classical.choice, Quot.sound}. Gate
   verdict at founding: PASS (proof/CHECK.log).
+- solver/ — the deterministic solver of the
+  specification's section 7 contract, with the named
+  instances (X, D, both forms of E, and the arena
+  instance at seeds 11 and 23), the arena model the
+  arena instance was built from, and the encoder that
+  carries the arena instance into the proof tree as
+  coded Lean data. The solver is an implementation
+  checked against the proved definitions, not a
+  theorem; the checking is the solver agreement stage
+  of the full gate below.
 
 ## Headline results
 
@@ -83,3 +93,17 @@ printed foundational principles of all 58 theorems
 against the allowed set {propext, Classical.choice,
 Quot.sound}. Founding verdict: PASS; the run is recorded
 in proof/CHECK.log.
+
+The full gate adds the solver agreement stage:
+
+    cd proof
+    LEAN=lean sh gate.sh
+
+It runs the proof gate first, then evaluates the proved
+definitions on the named instances with the
+expectations program (proof/Expect.lean, with the coded
+arena instances of proof/Arena.lean), runs the solver
+twice on every instance, and fails closed unless the
+two solver runs are byte-identical and the solver's
+output agrees with the expectations line for line.
+Python 3 is required for the solver stage.

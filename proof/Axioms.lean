@@ -3,11 +3,15 @@
   Every theorem of the core and of the controls is printed
   with the foundational principles it depends on; the
   family gate fails if any printed principle lies outside
-  the allowed set of three.
+  the allowed set of three. The computation identities of
+  the expectations program are printed on the same terms:
+  they are the lemmas the solver gate's expectations rest
+  on, so their principles are audited with the rest.
 -/
 
 import Hma
 import Controls
+import Expect
 
 open Hma
 
@@ -69,3 +73,11 @@ open Hma
 #print axioms Ctl.evalues
 #print axioms Ctl.eonehighest
 #print axioms Ctl.etwohighest
+#print axioms Expect.engagedlisteq
+#print axioms Expect.mapifsum
+#print axioms Expect.musum
+#print axioms Expect.diffmem
+#print axioms Expect.suball
+#print axioms Expect.agreeoffdiff
+#print axioms Expect.pairmem
+#print axioms Expect.tablive
