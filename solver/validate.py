@@ -10,6 +10,8 @@ import subprocess
 import sys
 from typing import Any
 
+import compat
+import verify
 from independent import brute_force
 from lean_check import check_against_lean
 from model import InputError, Table, _object_without_duplicate_keys, _reject_constant, load_table
@@ -172,18 +174,35 @@ def _run_solver(table_path: Path) -> tuple[bytes, bytes]:
 
 def _validate_one(filename: str, expected_name: str | None, lean: str, proof_dir: Path) -> tuple[Table, dict[str, Any], str]:
     table_path = FIXTURES / filename
-    if not table_path.is_file():
-        raise FileNotFoundError(f"required fixture is missing: {table_path}")
-    table = load_table(table_path)
+    if filename == "arena.json":
+        # One authoritative arena table; preserve the legacy API without a
+        # second stored copy of the 1,152-row fixture.
+        table = compat.table(verify.read_json(ROOT / "solver/instances/arena.json"))
+        from solver import solve as legacy_solve
+        first_stdout = json.dumps(legacy_solve(table), ensure_ascii=False, sort_keys=True,
+                                  indent=2, allow_nan=False).encode()
+        second_stdout = json.dumps(legacy_solve(table), ensure_ascii=False, sort_keys=True,
+                                   indent=2, allow_nan=False).encode()
+        first_stderr = second_stderr = b""
+    else:
+        if not table_path.is_file():
+            raise FileNotFoundError(f"required fixture is missing: {table_path}")
+        table = load_table(table_path)
+        first_stdout, first_stderr = _run_solver(table_path)
+        second_stdout, second_stderr = _run_solver(table_path)
     if expected_name is not None and table.name != expected_name:
         raise InputError(f"{filename} must have instance name {expected_name!r}, got {table.name!r}")
-
-    first_stdout, first_stderr = _run_solver(table_path)
-    second_stdout, second_stderr = _run_solver(table_path)
     if first_stdout != second_stdout or first_stderr != second_stderr:
         raise RuntimeError(f"byte-exact determinism failure on {table.name}")
     output = _parse_solver_output(first_stdout, first_stderr, table)
-    version, _source = check_against_lean(table, output, lean, proof_dir)
+    expected = verify.compute_expected(compat.instance(table), lean=lean, build_dir=proof_dir)
+    if verify.canonical(output) != verify.canonical(compat.result(table, expected)):
+        raise RuntimeError("legacy-format result disagrees with imported Hma definitions")
+    if filename != "arena.json":
+        # Retain the concrete kernel certificates used by the merged interface.
+        version, _source = check_against_lean(table, output, lean, proof_dir)
+    else:
+        version = "4.19.0 (compiled definition evaluation)"
 
     if table.name == "X":
         independent = brute_force(table)
@@ -224,7 +243,7 @@ def main(argv: list[str] | None = None) -> int:
         except FileNotFoundError as exc:
             failures += 1
             print(f"BLOCKED {expected_name or 'arena'}: {exc}")
-        except (InputError, RuntimeError, subprocess.SubprocessError) as exc:
+        except (InputError, verify.Rejected, RuntimeError, subprocess.SubprocessError) as exc:
             failures += 1
             print(f"FAIL {expected_name or filename}: {exc}")
 

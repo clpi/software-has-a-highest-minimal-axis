@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """System 3: incremental highest-minimal-axis solve under row joins.
 
-Wraps the finite HMA table solver (software-has-a-highest-minimal-axis,
-solver/ at b12fdb2) as the checker, unmodified, and reuses its strict
-input model (model.load_table) so the engine reads exactly the tables the
-solver reads.
+Uses the repository's hma-table-v1 compatibility entry point (solver.py),
+which delegates to the shared finite engine through compat.py, as its
+from-scratch differential checker. It shares the legacy input model
+(model.load_table) and validates direct Row updates against the same
+declared names, finite domains and canonical JSON value semantics.
 
 Rule (SPEC.md, system 3, the difference-set cone): for a row pair, its
 difference set is the set of axes on which the two configurations differ.
@@ -48,14 +49,22 @@ class AxisEngine:
         then join the table's rows. (Joining from empty is the build.)"""
         self.model = model
         self.name = table.name
-        self.axes_decl = table.axes
-        self.components = table.components
-        self.edges_decl = table.edges
-        self.axis_names = tuple(sorted(a.name for a in table.axes))
+        # A frozen dataclass does not freeze the JSON values inside it. Own
+        # the declarations as well as the rows so a caller cannot change the
+        # checker's reconstructed input without an engine transition.
+        self.axes_decl = tuple(model.Axis(a.name, tuple(self._json_copy(v) for v in a.values))
+                               for a in table.axes)
+        self.components = tuple(table.components)
+        self.edges_decl = tuple(model.Edge(tuple(e.components), e.weight) for e in table.edges)
+        self.axis_names = tuple(sorted(a.name for a in self.axes_decl))
+        self._axis_keys = frozenset(self.axis_names)
+        self._component_keys = frozenset(self.components)
+        self._domains = {a.name: frozenset(model.canonical(v) for v in a.values)
+                         for a in self.axes_decl}
         self.n = len(self.axis_names)
         self.comp_index = {c: i for i, c in enumerate(self.components)}
         self.edges = [(tuple(self.comp_index[c] for c in e.components), e.weight)
-                      for e in table.edges]
+                      for e in self.edges_decl]
         self.rows = []          # (config tuple of canonical values, behavior tuple of canonical)
         self.raw_rows = []      # model.Row objects, for building the checker's table
         self.dc = {}            # difference mask -> frozenset of components
@@ -74,10 +83,64 @@ class AxisEngine:
         mu = sum(self.edges[i][1] for i in engaged)
         return engaged, mu, len(live)
 
+    def _json_copy(self, value):
+        """Detach a JSON value and reject Python-only or cyclic values.
+
+        The legacy model admits JSON arrays, objects and finite numbers as
+        labels. Its canonical encoder remains the equality authority here.
+        """
+        active = set()
+
+        def copy_value(item):
+            if item is None or type(item) in (bool, int, float, str):
+                return item
+            if type(item) not in (list, dict):
+                raise NotAJoin("row value is not a JSON value")
+            identity = id(item)
+            if identity in active:
+                raise NotAJoin("cyclic row value is not JSON")
+            active.add(identity)
+            try:
+                if type(item) is list:
+                    return [copy_value(v) for v in item]
+                if any(type(k) is not str for k in item):
+                    raise NotAJoin("JSON object keys must be strings")
+                return {k: copy_value(v) for k, v in item.items()}
+            finally:
+                active.remove(identity)
+
+        try:
+            copied = copy_value(value)
+            self.model.canonical(copied)
+            return copied
+        except (self.model.InputError, RecursionError) as error:
+            raise NotAJoin("row value is not valid canonical JSON: " + str(error)) from error
+
+    def _configuration(self, configuration):
+        if (type(configuration) is not dict
+                or any(type(k) is not str for k in configuration)
+                or set(configuration) != self._axis_keys):
+            raise NotAJoin("configuration axis names must exactly match the declarations")
+        copied = {a: self._json_copy(configuration[a]) for a in self.axis_names}
+        encoded = tuple(self.model.canonical(copied[a]) for a in self.axis_names)
+        if any(value not in self._domains[a] for a, value in zip(self.axis_names, encoded)):
+            raise NotAJoin("configuration value is outside its declared axis domain")
+        return copied, encoded
+
+    def _prepare_row(self, row):
+        if not isinstance(row, self.model.Row):
+            raise NotAJoin("join entries must be model.Row values")
+        configuration, cfg = self._configuration(row.configuration)
+        if (type(row.behavior) is not dict
+                or any(type(k) is not str for k in row.behavior)
+                or set(row.behavior) != self._component_keys):
+            raise NotAJoin("behavior component names must exactly match the declarations")
+        behavior = {b: self._json_copy(row.behavior[b]) for b in self.components}
+        beh = tuple(self.model.canonical(behavior[b]) for b in self.components)
+        return self.model.Row(configuration, behavior), cfg, beh
+
     def _encode(self, row):
-        c = self.model.canonical
-        cfg = tuple(c(row.configuration[a]) for a in self.axis_names)
-        beh = tuple(c(row.behavior[comp]) for comp in self.components)
+        _, cfg, beh = self._prepare_row(row)
         return cfg, beh
 
     def join(self, new_rows):
@@ -86,8 +149,12 @@ class AxisEngine:
         # refused join leaves the engine exactly as it was.
         encoded = []
         seen = {r[0]: r[1] for r in self.rows}
-        for row in new_rows:
-            cfg, beh = self._encode(row)
+        try:
+            batch = iter(new_rows)
+        except TypeError as error:
+            raise NotAJoin("join requires an iterable of model.Row values") from error
+        for row in batch:
+            detached, cfg, beh = self._prepare_row(row)
             if cfg in seen:
                 if seen[cfg] == beh:
                     raise NotAJoin("duplicate row: not a join (the solver rejects it)")
@@ -95,7 +162,7 @@ class AxisEngine:
                                "a withdrawal plus a join, invalidating every pair "
                                "touching that row; not handled as a join")
             seen[cfg] = beh
-            encoded.append((row, cfg, beh))
+            encoded.append((detached, cfg, beh))
         before = self.pairs_computed
         self.remeasured = set()
         added = {}  # mask -> components newly added to dc[mask]
@@ -139,8 +206,16 @@ class AxisEngine:
         pairs, so counting is complete. count_mutant drops a component at
         its first lost support (overdelete with no rederive).
         Returns (pairs released, subsets re-measured)."""
-        c = self.model.canonical
-        gone = {tuple(c(cfg[a]) for a in self.axis_names) for cfg in configurations}
+        gone = set()
+        try:
+            batch = iter(configurations)
+        except TypeError as error:
+            raise NotAJoin("withdrawal requires an iterable of configurations") from error
+        for configuration in batch:
+            _, cfg = self._configuration(configuration)
+            if cfg in gone:
+                raise NotAJoin("duplicate withdrawal configuration")
+            gone.add(cfg)
         idx = [i for i, r in enumerate(self.rows) if r[0] in gone]
         if len(idx) != len(gone):
             raise NotAJoin("withdrawal of a configuration that is not in the contract")
@@ -231,5 +306,8 @@ class AxisEngine:
 
     def table(self):
         """The joined instance as a solver Table (for the checker)."""
-        return self.model.Table(self.name, self.axes_decl, self.components,
-                                tuple(self.raw_rows), self.edges_decl)
+        axes = tuple(self.model.Axis(a.name, tuple(self._json_copy(v) for v in a.values))
+                     for a in self.axes_decl)
+        rows = tuple(self.model.Row(self._json_copy(row.configuration), self._json_copy(row.behavior))
+                     for row in self.raw_rows)
+        return self.model.Table(self.name, axes, self.components, rows, self.edges_decl)

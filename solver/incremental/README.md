@@ -23,8 +23,12 @@ that skips supersets is caught.
 
 Lean, over ../../proof/Hma.lean unchanged: agreeoff_iff_diff, join_live,
 scoped_live, witness_mono, scoped_rho, delete_live, scoped_delete,
-survives_of_witness, scoped_rho_delete. This file sits outside proof/ so
-proof/check.sh and its pinned theorem counts are untouched.
+survives_of_witness, scoped_rho_delete. These sources also participate in the
+repository's cold `proof/check.sh` gate; the original 58 proof files and their
+axiom sets remain unchanged. This legacy engine's differential tests use the
+Python solver. The separate materialized Lean backend and kernel certificates
+are documented in [`../CERTIFIED-EXECUTION.md`](../CERTIFIED-EXECUTION.md);
+those proofs are not universal correctness theorems for this Python engine.
 
 Randomized check: `python3 -B solver/incremental/fuzz/fuzz_s3.py solver`
 builds random tables (2 to 4 axes, 2 to 4 components, random edges) and runs

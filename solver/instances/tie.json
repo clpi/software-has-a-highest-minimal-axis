@@ -1,0 +1,130 @@
+{
+  "schema": 1,
+  "name": "tie",
+  "axes": [
+    {
+      "name": "a",
+      "values": [
+        false,
+        true
+      ]
+    },
+    {
+      "name": "b",
+      "values": [
+        false,
+        true
+      ]
+    },
+    {
+      "name": "c",
+      "values": [
+        false,
+        true
+      ]
+    }
+  ],
+  "components": [
+    "p",
+    "q"
+  ],
+  "contract": [
+    {
+      "axes": [
+        false,
+        false,
+        false
+      ],
+      "behavior": [
+        false,
+        false
+      ]
+    },
+    {
+      "axes": [
+        false,
+        false,
+        true
+      ],
+      "behavior": [
+        true,
+        true
+      ]
+    },
+    {
+      "axes": [
+        false,
+        true,
+        false
+      ],
+      "behavior": [
+        false,
+        true
+      ]
+    },
+    {
+      "axes": [
+        false,
+        true,
+        true
+      ],
+      "behavior": [
+        true,
+        false
+      ]
+    },
+    {
+      "axes": [
+        true,
+        false,
+        false
+      ],
+      "behavior": [
+        true,
+        false
+      ]
+    },
+    {
+      "axes": [
+        true,
+        false,
+        true
+      ],
+      "behavior": [
+        false,
+        true
+      ]
+    },
+    {
+      "axes": [
+        true,
+        true,
+        false
+      ],
+      "behavior": [
+        true,
+        true
+      ]
+    },
+    {
+      "axes": [
+        true,
+        true,
+        true
+      ],
+      "behavior": [
+        false,
+        false
+      ]
+    }
+  ],
+  "hyperedges": [
+    {
+      "components": [
+        "p",
+        "q"
+      ],
+      "weight": 1
+    }
+  ]
+}

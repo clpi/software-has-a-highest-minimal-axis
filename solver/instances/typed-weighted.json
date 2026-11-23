@@ -1,0 +1,152 @@
+{
+  "schema": 1,
+  "name": "typed-weighted",
+  "axes": [
+    {
+      "name": "a",
+      "values": [
+        null,
+        false,
+        0,
+        "0"
+      ]
+    },
+    {
+      "name": "b",
+      "values": [
+        "cold",
+        "hot"
+      ]
+    }
+  ],
+  "components": [
+    "p",
+    "q",
+    "r",
+    "constant"
+  ],
+  "contract": [
+    {
+      "axes": [
+        null,
+        "cold"
+      ],
+      "behavior": [
+        null,
+        null,
+        "cold",
+        false
+      ]
+    },
+    {
+      "axes": [
+        null,
+        "hot"
+      ],
+      "behavior": [
+        null,
+        null,
+        "hot",
+        false
+      ]
+    },
+    {
+      "axes": [
+        false,
+        "cold"
+      ],
+      "behavior": [
+        false,
+        false,
+        "cold",
+        false
+      ]
+    },
+    {
+      "axes": [
+        false,
+        "hot"
+      ],
+      "behavior": [
+        false,
+        false,
+        "hot",
+        false
+      ]
+    },
+    {
+      "axes": [
+        0,
+        "cold"
+      ],
+      "behavior": [
+        0,
+        0,
+        "cold",
+        false
+      ]
+    },
+    {
+      "axes": [
+        0,
+        "hot"
+      ],
+      "behavior": [
+        0,
+        0,
+        "hot",
+        false
+      ]
+    },
+    {
+      "axes": [
+        "0",
+        "cold"
+      ],
+      "behavior": [
+        "0",
+        "0",
+        "cold",
+        false
+      ]
+    },
+    {
+      "axes": [
+        "0",
+        "hot"
+      ],
+      "behavior": [
+        "0",
+        "0",
+        "hot",
+        false
+      ]
+    }
+  ],
+  "hyperedges": [
+    {
+      "components": [
+        "p",
+        "q"
+      ],
+      "weight": 3
+    },
+    {
+      "components": [
+        "q",
+        "r"
+      ],
+      "weight": 2
+    },
+    {
+      "components": [],
+      "weight": 0
+    },
+    {
+      "components": [
+        "constant"
+      ],
+      "weight": 0
+    }
+  ]
+}

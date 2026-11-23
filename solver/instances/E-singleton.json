@@ -1,0 +1,53 @@
+{
+  "schema": 1,
+  "name": "E-singleton",
+  "axes": [
+    {
+      "name": "a",
+      "values": [
+        false,
+        true
+      ]
+    },
+    {
+      "name": "b",
+      "values": [
+        false,
+        true
+      ]
+    },
+    {
+      "name": "c",
+      "values": [
+        false,
+        true
+      ]
+    }
+  ],
+  "components": [
+    "p",
+    "q"
+  ],
+  "contract": [
+    {
+      "axes": [
+        false,
+        false,
+        false
+      ],
+      "behavior": [
+        false,
+        false
+      ]
+    }
+  ],
+  "hyperedges": [
+    {
+      "components": [
+        "p",
+        "q"
+      ],
+      "weight": 1
+    }
+  ]
+}

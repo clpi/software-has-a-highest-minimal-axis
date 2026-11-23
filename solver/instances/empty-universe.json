@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "name": "empty-universe",
+  "axes": [],
+  "components": [],
+  "contract": [
+    {
+      "axes": [],
+      "behavior": []
+    }
+  ],
+  "hyperedges": []
+}

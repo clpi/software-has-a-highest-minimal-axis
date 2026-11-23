@@ -3,10 +3,10 @@
 A qualified parametric system — named axes, a contract of
 allowed configurations, a behavior function on finite
 components, and a hypergraph joining the components —
-always has a highest minimal axis vector: a smallest axis
+always has a highest minimal axis vector: an inclusion-minimal axis
 set whose variation inside the contract already produces
 the full emergent live interacting structure, and among
-those smallest sets one whose refinement vector
+those minimal sets one whose refinement vector
 (mu, lambda), emergence first and live count second, is
 maximal. The induced transformation from variations of
 that minimal vector to behavior variations loses no
@@ -30,7 +30,27 @@ engaged hyperedge.
   The family gate: proof/check.sh, cold, Lean 4.19.0,
   warnings as errors, escape scan, dependency audit
   inside {propext, Classical.choice, Quot.sound}. Gate
-  verdict at founding: PASS (proof/CHECK.log).
+  verdict at founding: PASS. The original 58 theorem sources and their
+  per-theorem axiom sets are retained by the current gate.
+- solver/ — a deterministic executable implementation of SPEC.md section 7,
+  an independent decoder and Lean-definition checker, X/D/E fixtures, and the
+  recovered 1,152-row arena instance. The solver returns the chosen vector,
+  every minimal vector, per-axis dispositions, and every subset's measurements.
+  It is an **implementation checked against the proved definitions**, not a
+  new theorem establishing correctness of the Python program for all inputs.
+- proof/FiniteCheck.lean — five additional bridge lemmas equating executable
+  finite-table views with the existing `Hma` definitions. These support the
+  checker; they do not prove the external solver or decoder correct.
+- [solver/README.md](solver/README.md) — input/output contract, commands,
+  checking mechanism, results, and the not-landed / cannot-say list.
+- proof/ExecutableWitness.lean, CertifiedTable.lean, CertifiedReplay.lean —
+  the actual materialized Lean witness engine, complete result renderer, and
+  carried certification/replay protocol, with correctness proofs. The Python
+  implementation is checked against this executed reference as well as the
+  original definitions. Concrete incremental kernel certificates validate
+  supplied cache transitions and complete supplied outputs.
+- [solver/arena/README.md](solver/arena/README.md) — exact source pin,
+  reproducible arena extraction, and lossless table encoding.
 
 ## Headline results
 
@@ -71,15 +91,76 @@ engaged hyperedge.
 
 ## Gate
 
-Run cold from the proof directory, with the pinned
-Lean 4.19.0 on the path:
+Run from the repository root with Lean 4.19.0, Python 3.10 or newer,
+and Node.js on the path:
 
-    cd proof
-    LEAN=lean sh check.sh
+    LEAN=lean sh proof/check.sh
 
-The gate rejects every proof escape token in every Lean
-file, compiles with warnings as errors, and audits the
-printed foundational principles of all 58 theorems
-against the allowed set {propext, Classical.choice,
-Quot.sound}. Founding verdict: PASS; the run is recorded
-in proof/CHECK.log.
+The gate cold-compiles every Lean file in the repository with warnings as
+errors, audits the unchanged original 58 theorems and every added proof, checks
+the arena's source/table correspondence, compares every solver result with
+Lean's definitions, checks incremental outputs at every campaign prefix, restores
+checkpoints and replays their suffixes, and compares two independent processes
+byte for byte for each original and restored campaign. Four upstream hypergraph
+modules are verified against their recorded pin and digests. The complete
+minimal list can be exponentially large; `proof/Exponential.lean` proves an
+actual HMA family with `2k` axes, `2k+1` distinct rows, and exactly `2^k` highest
+minimal vectors.
+Wrong outputs, incomplete results, stale recorded outputs, malformed input,
+missing tools, or checker failures reject the run. GitHub Actions runs the same
+gate. The current receipt is [proof/CHECK.log](proof/CHECK.log); complete
+per-instance outputs are in [solver/results](solver/results).
+
+For example:
+
+```sh
+python3 solver/solve.py solver/instances/X.json
+python3 solver/solve.py solver/instances/arena.json
+```
+
+The arena selects `{count}`, with `rho = (4,5)`. Its full minimal list is
+`{count}`, `{material}`, `{motion}`, `{place}`, all with the same `rho`.
+The name-order tie break chooses `{count}`. Inclusion minimality does not mean
+minimum cardinality: the `tie` control deliberately chooses `{a,b}` over `{c}`.
+
+## Incremental reconstruction and replay
+
+`solver/incremental.py` maintains pair-witness multiplicities and updates only
+the superset cones whose support becomes present or absent. It supports row
+append, withdrawal, atomic behavior replacement, edge/weight edits, and explicit
+schema rebases. It retains current input and derived support counts, with no
+stored event history or individual pair records. Checkpoints keep current input,
+sequence/epoch boundaries, and work counters; restoration reconstructs the caches.
+Historical metadata is retained only when needed to reconstruct or replay a
+promised observation. A compact checkpoint does not promise discarded-prefix replay.
+
+The imported family hypergraph closure is connected directly to `Hma.live` and
+`Hma.engaged` in `proof/HmaGraph.lean`. `proof/Incremental.lean` proves row-witness
+cache preservation, mixed insertion/withdrawal prefixes, replay composition,
+checkpoint suffix equivalence, and sequence fencing in the mathematical model.
+`proof/IncrementalCounts.lean` proves exact subset, affected-cone and cumulative
+pair counts. The Python implementation remains checked against those definitions;
+it is not universally proved by these mathematical results.
+
+The materialized Lean backend closes the separate implementation gap:
+`ExecutableWitness.lean` proves its actual `Std.HashMap` transitions,
+including behavior-compatible reuse, current-support bounds and reconstruction
+equivalence. `CertifiedTable.lean` proves its complete returned structure and
+lexicographic tie-break. `CertifiedReplay.lean` carries those proofs with each
+state and checks that active rows reconstruct the requested input before
+returning a result. It also covers schema changes between different finite
+carrier types and the sequence/epoch boundary.
+
+```sh
+LEAN=lean python3 solver/certified.py solver/instances/X.json
+```
+
+This command cold-builds the backend and executes it twice, requiring exact
+byte agreement. See [solver/CERTIFIED-EXECUTION.md](solver/CERTIFIED-EXECUTION.md)
+for the proof chain, incremental certificate mechanism, and execution boundary.
+
+See [solver/INCREMENTAL-MODEL.md](solver/INCREMENTAL-MODEL.md) for exact theorem
+boundaries, costs, compaction, and empirical validation, and
+[solver/VALIDATION.md](solver/VALIDATION.md) for the delivered checks and limitations.
+The previously merged `hma-table-v1` CLI remains available through
+`python3 solver/solver.py solver/fixtures/x.json`; it adapts to the same solver.
