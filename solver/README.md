@@ -53,6 +53,15 @@ the check.
 
 ## Incremental use and the existing interface
 
+The persistent online and parametric interfaces are documented in
+[PARAMETRIC-REASONING.md](PARAMETRIC-REASONING.md). `reasoning.py` builds one fixed
+native executable, then reads current requests without generating source for
+future campaign inputs. The `hma`, `pareto`, `controller`, and `policy` lanes
+carry actual Lean validity proofs with their materialized states. Their mandatory
+gate checks exact frontiers, global bounded policy optimality, parameter regions,
+dependency-based recertification, remaining component commitments, and an
+empirical autonomous qualification loop.
+
 `incremental.py` accepts a strict JSON campaign with `schema: 1`, an `initial`
 instance (or checkpoint), and `events`. Each event supplies the next contiguous
 `seq`, current schema `epoch`, an `op`, and its operation's payload. For example,
@@ -331,8 +340,10 @@ byte before passing it to the same solver/checker used for X/D/E.
   types. The Python transition code remains checked. General acceptance of
   every compatible reconciliation is not proved; the batch Lean solver is
   total under its stated premises. The compiled campaign driver stages the
-  finite input trace; the current-state storage bound does not apply to the
-  entire generated binary or to an online streaming service.
+  finite input trace; its current-state storage bound does not apply to that
+  entire generated binary. The additional fixed online executable accepts
+  requests after compilation and carries the same certified current state;
+  see [PARAMETRIC-REASONING.md](PARAMETRIC-REASONING.md).
 - The ordered sequence adapter rejects duplicate delivery. It does not implement
   the family's separate admission protocol for distributed idempotent merges.
 - Pair/support counters are exact for measured operations, not total CPU cost.

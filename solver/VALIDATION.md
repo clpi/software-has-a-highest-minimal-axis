@@ -137,6 +137,52 @@ is executable evidence, not a new closed theorem for its complete result.
   and exactly `2^k` distinct sets whose membership is equivalent to both
   `Hma.minimal` and `Hma.highest`.
 
+## Online parametric reasoning
+
+The fixed native executable receives each request after compilation and carries
+current certified state across requests. It exposes the HMA, Pareto, scalar
+controller and budget-constrained policy lanes described in
+[PARAMETRIC-REASONING.md](PARAMETRIC-REASONING.md). The mandatory gate runs all
+four against one freshly built executable and compares their reports with new
+execution; a stale report fails rather than being overwritten.
+
+| Check | Recorded coverage | Required agreement |
+| --- | --- | --- |
+| Online HMA | 14 campaigns, 108 prefixes | Current input, full original-definition output, witnesses, clocks, work, checkpoint suffixes and raw bytes |
+| Pareto | 90 prefixes: 42 generic and 48 HMA | Full catalogue/frontier, all-parameter linear regions, equal-cost identities, resurrection, exact comparison reuse and raw bytes |
+| Scalar controller | 75 accepted prefixes, 10 refusals | Every cached Bellman layer, values/actions against complete adaptive-tree enumeration, dependency work, cumulative vector and raw bytes |
+| Policy controller | 7 campaigns, 30 prefixes, 14 refusals | Every adaptive policy/profile, budget-feasible catalogue/frontier, global nondominance, weighted optimum, dependencies, cumulative bounds and raw bytes |
+| Autonomous qualification | 5 parameter regimes, 15 decisions | Selected actions drive real online HMA updates; fresh original-definition agreement and measured work precede outcome admission |
+| Concrete reasoning certificates | 6 accepted and 6 rejected claims | Lean kernel accepts exact claims and rejects nearby false claims for the expected logical reason |
+
+The autonomous initial problem contains 729 syntactic policies and all 29
+admissible schedules for qualifying eight X rows in at most three nonempty
+batches. Its unrestricted frontier has five policy identities and three cost
+vectors: `(28,1,64)`, `(28,2,32)`, and `(28,3,22)`. Coordinates mean incident pair
+evaluations, nonempty submissions and the declared square-of-batch-size tariff.
+That tariff is not a CPU measurement. Every run completes all eight rows with
+28 pair evaluations. All 15 corrupted pair-count observations are refused
+before policy admission. Four distinct current inputs are checked freshly
+against the original Lean definitions. Entire paired process transcripts are
+compared byte for byte across two fresh executions.
+
+The policy lane first chooses globally over all admissible policies and commits
+the resulting cost vector. Its subsequent emitted frontier is complete among
+budget-feasible policies. The selected policy remains globally nondominated
+among all structurally admissible policies and minimizes the current weighted
+objective among every budget-feasible continuation. Parameter changes preserve
+the cumulative component commitment. Unsupported or infeasible model revisions
+reject atomically; a rebase explicitly starts a new commitment.
+
+This extension adds universal proofs for the executed finite Pareto and
+controller functions. It does not recast the Python solver as a new theorem.
+The actual scalar outcome transition is connected to the abstract cumulative
+minimax theorem by `ControllerRefinement.lean`. `OnlinePolicy.lean` proves
+selected-record/action existence and acceptance of every supported outcome
+for each carried positive-horizon state. The autonomous Python orchestration
+and concrete transcript are checked integration, not a new closed theorem for
+the entire external loop.
+
 ## Not landed / cannot say
 
 All SPEC section 7 computation/output obligations are implemented for the

@@ -1,0 +1,259 @@
+{
+  "engine": "fixed-persistent-Lean-Pareto",
+  "generic": {
+    "controls": [
+      "latent-dominated-self-comparison",
+      "atomic-refusal-0",
+      "atomic-refusal-1",
+      "atomic-refusal-2",
+      "atomic-refusal-3",
+      "atomic-refusal-4",
+      "atomic-refusal-5",
+      "atomic-refusal-6",
+      "atomic-refusal-7",
+      "atomic-refusal-8",
+      "atomic-refusal-9",
+      "hidden-comparison",
+      "missing-frontier",
+      "wrong-parameter",
+      "wrong-selected",
+      "missing-linear-region",
+      "wrong-active-region",
+      "false-counter",
+      "unsupported-Pareto-point-retained"
+    ],
+    "cumulative_comparisons": 202,
+    "output_sha256": "939e4ce386df5d18263fca25be89832cbdd9c490decfaa1fe161fdadc55ccf6c",
+    "prefixes": 42,
+    "request_sha256": "d1527fb2030d1495baaf65bf45b8fc3b8029ca9ae5a59ce75d01750712ca1230",
+    "responses": 63
+  },
+  "hma": {
+    "D": {
+      "cumulative_comparisons": 3,
+      "final_rows": 1,
+      "frontier": [
+        {
+          "id": 0,
+          "profile": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "initial_rows": 2,
+      "output_sha256": "a9c8df52e842089e730a18d670a2bd8c4b6ac3db8c16745fa015d5ece47bb00a",
+      "prefixes": 6,
+      "selected": {
+        "id": 0,
+        "profile": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "E-empty": {
+      "cumulative_comparisons": 1,
+      "final_rows": 0,
+      "frontier": [
+        {
+          "id": 0,
+          "profile": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "initial_rows": 0,
+      "output_sha256": "73a1eda6f3453172729eaa3e9f27ddf72fcf39772bffb465f26f46c97ea66629",
+      "prefixes": 6,
+      "selected": {
+        "id": 0,
+        "profile": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "E-singleton": {
+      "cumulative_comparisons": 1,
+      "final_rows": 0,
+      "frontier": [
+        {
+          "id": 0,
+          "profile": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "initial_rows": 1,
+      "output_sha256": "66b9b6391d7ad13d2ab18b80a576e203e60ec83773c9db4bcb7f79772c537300",
+      "prefixes": 6,
+      "selected": {
+        "id": 0,
+        "profile": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "X": {
+      "cumulative_comparisons": 7,
+      "final_rows": 7,
+      "frontier": [
+        {
+          "id": 4,
+          "profile": [
+            1,
+            -2,
+            1
+          ]
+        },
+        {
+          "id": 1,
+          "profile": [
+            1,
+            -3,
+            9
+          ]
+        }
+      ],
+      "initial_rows": 8,
+      "output_sha256": "f73a5bce57ce72119a4c4769831d028495164f0cf9c5b079bf1a912a2e18a777",
+      "prefixes": 6,
+      "selected": {
+        "id": 4,
+        "profile": [
+          1,
+          -2,
+          1
+        ]
+      }
+    },
+    "arena": {
+      "cumulative_comparisons": 23,
+      "final_rows": 1151,
+      "frontier": [
+        {
+          "id": 8,
+          "profile": [
+            1,
+            -5,
+            1
+          ]
+        },
+        {
+          "id": 4,
+          "profile": [
+            1,
+            -5,
+            1
+          ]
+        },
+        {
+          "id": 2,
+          "profile": [
+            1,
+            -5,
+            1
+          ]
+        }
+      ],
+      "initial_rows": 1152,
+      "output_sha256": "7edaeffc48999ce020ffe72868090ea90dbb94fec7c79f31d72c2dc973226efa",
+      "prefixes": 6,
+      "selected": {
+        "id": 2,
+        "profile": [
+          1,
+          -5,
+          1
+        ]
+      }
+    },
+    "empty-universe": {
+      "cumulative_comparisons": 1,
+      "final_rows": 0,
+      "frontier": [
+        {
+          "id": 0,
+          "profile": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "initial_rows": 1,
+      "output_sha256": "9fa422173bf82da85f0630ecd96daf3174a98cdf5d8619a8e1cc210f458cc2f1",
+      "prefixes": 6,
+      "selected": {
+        "id": 0,
+        "profile": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "tie": {
+      "cumulative_comparisons": 7,
+      "final_rows": 7,
+      "frontier": [
+        {
+          "id": 4,
+          "profile": [
+            1,
+            -2,
+            1
+          ]
+        }
+      ],
+      "initial_rows": 8,
+      "output_sha256": "ff68632785aad58e295e453f33b0b186bd1a9aa9eafc765552adc0969e03fc56",
+      "prefixes": 6,
+      "selected": {
+        "id": 4,
+        "profile": [
+          1,
+          -2,
+          1
+        ]
+      }
+    },
+    "typed-weighted": {
+      "cumulative_comparisons": 2,
+      "final_rows": 7,
+      "frontier": [
+        {
+          "id": 3,
+          "profile": [
+            2,
+            -3,
+            10
+          ]
+        }
+      ],
+      "initial_rows": 8,
+      "output_sha256": "43a6e33f2328b17370e7bd9f814b19b8da3ad3dd8f30f89686c4e604fa082d56",
+      "prefixes": 6,
+      "selected": {
+        "id": 3,
+        "profile": [
+          2,
+          -3,
+          10
+        ]
+      }
+    }
+  },
+  "schema": 1,
+  "two_process_bytes": "EXACT"
+}
