@@ -5,9 +5,13 @@ replay a permitted future suffix, and validate its outcomes. Preserving every
 historical receipt, derivation path, or intermediate cache is not a requirement.
 The materializer stores no event log and no individual pair-witness records.
 
-There are two different kinds of evidence in this directory. The Lean modules
-prove statements about the mathematical models. The gate checks executions of
-the Python materializer against the original Lean definitions. These checks do
+The original model proofs and the new executable-code proofs have distinct
+scopes. `ExecutableWitness.lean` now proves the actual materialized Lean
+hash-table transitions, and `CertifiedTable.lean` proves the complete rendered
+result. `CertifiedReplay.lean` connects admission, changed behavior, schema
+rebases and result certification. See [CERTIFIED-EXECUTION.md](CERTIFIED-EXECUTION.md).
+The gate checks executions of the Python materializer against the original Lean
+definitions and this executed, proved reference. These checks do
 not constitute a universal correctness theorem for the Python implementation,
 its decoder, serialization, compiler, or runtime.
 
@@ -132,6 +136,16 @@ or schema, as executed by the Python implementation, are checked against fresh
 Lean outcomes. The original hypergraph bridge proves equivalence of its
 abstract old/new graph projections; it is not a universal proof of the Python
 transaction code.
+
+The new materialized engine strengthens this earlier model boundary. Its
+`compatible_valid` theorem reuses exact current counts across a behavior change
+when behavior on retained rows agrees; changed rows are removed under the old
+function and added under the new. Its schema rebase accepts different carrier
+types by rebuilding, with proved clock transitions. The complete old/new
+transaction path carries actual map-validity proofs, and `finish` returns an
+output only after reconstructible input agreement. The reference execution
+checks each Python support multiplicity, so latent count corruption fails at
+the current prefix rather than waiting for an observable withdrawal error.
 
 The sequence protocol accepts only the next contiguous event in the current
 schema epoch. Older or duplicate transactions fail closed after restoration.

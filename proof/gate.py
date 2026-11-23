@@ -130,7 +130,8 @@ def main() -> int:
         require("version 4.19.0," in version, f"Wrong Lean version: {version}")
         require((ROOT / "proof/lean-toolchain").read_text().strip() == "leanprover/lean4:v4.19.0", "Unexpected toolchain pin")
         emit(version)
-        emit("Gate input sha256: " + digest_inputs())
+        input_digest = digest_inputs()
+        emit("Gate input sha256: " + input_digest)
         baseline = json.loads((ROOT / "proof/baseline.json").read_text())
         require(baseline["commit"] == "63d9d3fdce1f81c81cd5cda2bd9850b0c1494646", "Unexpected baseline pin")
         require(len(baseline["theorems"]) == 58, "Baseline must contain exactly 58 theorems")
@@ -158,9 +159,13 @@ def main() -> int:
             for name in declarations(source, path.relative_to(ROOT)):
                 require(name not in census, f"Duplicate theorem census name: {name}")
                 census[name] = path
-            relative = path.relative_to(ROOT / "proof") if path.is_relative_to(ROOT / "proof") else path.relative_to(ROOT)
-            module = ".".join(relative.with_suffix("").parts)
-            require(all(re.fullmatch(r"[A-Za-z][A-Za-z0-9_]*", part) for part in relative.with_suffix("").parts), f"Unsupported Lean module path: {relative}")
+            relative = path.relative_to(ROOT)
+            # The legacy cone gate imports HmaJoin by its standalone module
+            # name. Copy every source into the isolated flat module directory,
+            # rejecting collisions instead of silently skipping nested proofs.
+            module = path.stem
+            require(re.fullmatch(r"[A-Za-z][A-Za-z0-9_]*", module) is not None,
+                    f"Unsupported Lean module path: {relative}")
             require(module not in modules, f"Duplicate Lean module name: {module}")
             modules[module] = path
         require(set(baseline["theorems"]) <= set(census), "An original theorem is missing")
@@ -223,6 +228,11 @@ def main() -> int:
                 [sys.executable, str(ROOT / "solver/check.py")],
                 [sys.executable, str(ROOT / "solver/validate.py"), "--lean", lean, "--proof-dir", str(build)],
                 [sys.executable, str(ROOT / "solver/incremental_check.py")],
+                [sys.executable, str(ROOT / "solver/certified_check.py")],
+                [sys.executable, str(ROOT / "solver/certificate_check.py")],
+                [sys.executable, str(ROOT / "solver/incremental/gate.py"), "s3", str(ROOT / "solver")],
+                [sys.executable, str(ROOT / "solver/incremental/boundary_check.py")],
+                [sys.executable, str(ROOT / "solver/incremental/fuzz/fuzz_s3.py"), str(ROOT / "solver"), "300", "100"],
             ]
             for command in commands:
                 with subprocess.Popen(command, cwd=ROOT, env=env, text=True, stdout=subprocess.PIPE,
@@ -232,7 +242,8 @@ def main() -> int:
                         emit(line.rstrip("\n"))
                     require(process.wait() == 0, "Solver validation gate failed: " + Path(command[1]).name)
 
-        emit("GATE PASS: original proof baseline, hypergraph and incremental proofs, Lean outcomes at every campaign prefix, reconstruction and suffix replay, cumulative work, exponential controls, and byte-exact determinism")
+        require(digest_inputs() == input_digest, "Gate inputs changed during validation")
+        emit("GATE PASS: original proof baseline, materialized Lean transitions and complete renderer, kernel-checked incremental certificates, hypergraph/replay/counting proofs, all prefix outcomes, reconstruction, cumulative work, exponential controls, and byte-exact determinism")
         return 0
     except (RuntimeError, OSError, ValueError, subprocess.SubprocessError) as error:
         emit("REJECTED: " + str(error))

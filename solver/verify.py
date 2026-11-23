@@ -327,6 +327,12 @@ def compute_expected(instance: Any, *, build_dir: str | Path | None = None,
         instance = read_json(instance)
     data = decode(instance)
     records = lean_rows(data, build_dir=build_dir, lean=lean, timeout=timeout, control=control)
+    return result_from_records(data, records)
+
+
+def result_from_records(data: dict[str, Any], records: list[dict[str, Any]]) -> dict[str, Any]:
+    """Decode complete Lean observations; this adapter does no witness search."""
+    records = list(records)
     axes, comps, edges = data["axes"], data["components"], data["edges"]
     nsubsets = 1 << len(axes)
     need(len(records) == nsubsets + 1, "Lean did not enumerate the full subset space")

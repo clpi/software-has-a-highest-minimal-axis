@@ -74,6 +74,22 @@ at every prefix, work receipts, and a compact checkpoint. The Python API provide
 [INCREMENTAL-MODEL.md](INCREMENTAL-MODEL.md) describes the formal guarantees and
 checked implementation boundary. The full gate always runs incremental checks.
 
+The proved materialized Lean backend is also directly executable:
+
+```sh
+LEAN=lean python3 solver/certified.py solver/instances/arena.json
+LEAN=lean python3 solver/certified.py campaign.json --campaign
+LEAN=lean python3 solver/certificate_check.py --emit-dir /tmp/hma-certificate-sources
+```
+
+These commands cold-build their required modules automatically. The backend
+uses the actual hash-table transitions and complete renderer proved in Lean;
+it runs twice and compares raw output bytes. The certificate command emits
+concrete carried-state and complete-output proofs checked by the kernel.
+[CERTIFIED-EXECUTION.md](CERTIFIED-EXECUTION.md) documents the distinct proof
+and execution boundaries. The full gate checks every Python support layer,
+live bit and retained row against this reference at every campaign prefix.
+
 The `hma-table-v1` / `hma-result-v1` entry point merged on main remains supported:
 
 ```sh
@@ -279,9 +295,10 @@ byte before passing it to the same solver/checker used for X/D/E.
   explicit finite table format described above. There is no deferred X, D,
   empty/singleton E, or arena check in the gate.
 - The solver is **checked executable code**, not a theorem of correctness for
-  every possible input. The checker bridges and incremental/hypergraph/counting
-  proofs establish model facts, not correctness of the Python algorithm, JSON
-  decoders, serializer, Lean compiler/runtime, C compiler, or operating system.
+  every possible input. The additional Lean backend has correctness proofs for
+  its actual pure functions. Those proofs do not establish correctness of the
+  Python algorithm, JSON decoders, serializer, Lean compiler/runtime, C compiler,
+  or operating system.
 - The finite-instance agreement run is a runtime check. It is not presented
   as a new kernel proof certificate for the entire arena result. The existing
   58 theorems, the checker bridges, and the incremental/hypergraph/counting
@@ -309,9 +326,13 @@ byte before passing it to the same solver/checker used for X/D/E.
   do not authenticate fabricated historical observations or work counters and
   do not recover a discarded prefix without an earlier checkpoint/events or
   equivalent reconstruction source.
-- Mixed row insertion/withdrawal has a fixed-semantics model proof. Runtime
-  behavior replacement, edge edits and schema rebases are checked against
-  newly constructed Lean instances; the Python transition code is not proved.
+- The materialized Lean layer proves compatible transfer after behavior edits,
+  correct accepted outputs, and reconstruction across different schema carrier
+  types. The Python transition code remains checked. General acceptance of
+  every compatible reconciliation is not proved; the batch Lean solver is
+  total under its stated premises. The compiled campaign driver stages the
+  finite input trace; the current-state storage bound does not apply to the
+  entire generated binary or to an online streaming service.
 - The ordered sequence adapter rejects duplicate delivery. It does not implement
   the family's separate admission protocol for distributed idempotent merges.
 - Pair/support counters are exact for measured operations, not total CPU cost.

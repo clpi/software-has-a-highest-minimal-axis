@@ -1,15 +1,17 @@
 # Validation and exact claim boundary
 
 The deliverable is a deterministic finite-table solver and an incremental
-materializer **checked against the proved HMA definitions**. New Lean theorems
-prove the mathematical witness, hypergraph, replay and counting models. They
-are not a universal correctness theorem for the Python implementation.
+materializer **checked against the proved HMA definitions**. The additional
+Lean backend has proofs of its actual materialized witness transitions,
+complete renderer, admission checks and replay protocol. Concrete incremental
+kernel certificates validate supplied cache and output materializations.
+These are not a universal correctness theorem for the Python implementation.
 
 The original baseline is `63d9d3fdce1f81c81cd5cda2bd9850b0c1494646`.
 The original `Hma.lean` and `Controls.lean` bytes and all 58 individual axiom
-sets remain unchanged. The extended corpus contains 207 explicit theorem/lemma
-declarations across 12 Lean files, including 45 declarations imported unchanged
-from the existing hypergraph model. The gate audits the entire loaded proof
+sets remain unchanged. The gate records the full current source/declaration
+census, including 45 declarations imported unchanged from the existing
+hypergraph model. The gate audits the entire loaded proof
 environment, including generated theorem helpers, and rejects custom logical
 axioms and proof escapes.
 
@@ -93,6 +95,26 @@ gate separately challenges 20 corrupt outputs and 21 malformed inputs.
 
 ## What is proved
 
+The executed Lean backend and certificate chain are described in
+[CERTIFIED-EXECUTION.md](CERTIFIED-EXECUTION.md). The central new obligations are
+`HmaExecutable.append_valid`, `remove_valid`, `compatible_valid`,
+`liveList_exact`, `checkpoint_replay`, and `stored_cells_bound`;
+`HmaCertified.render_correct` and the lexicographic choice theorem;
+and `HmaReplay.finish_sound`, `solve_chosen`, `certified_hypergraph`,
+accepted-clock equations and exact pair-work accounting. These concern the
+same pure functions that the compiled backend executes. The finite delta
+certificate checker proves its acceptance criterion sound before using it to
+recertify supplied concrete materializations.
+
+The materialized backend's separate receipt is
+[results/certified.json](results/certified.json): 14 campaigns and 108 prefixes,
+with full output, exact-mask multiplicity, occupied-subset support, live bits,
+retained input, clock and work comparisons. Its two native process runs are
+compared as raw bytes. [results/certificates.json](results/certificates.json)
+records 7 smaller campaigns, 53 concrete prefixes, 106 named validity/outcome
+proofs, and 6 corrupt proof candidates rejected by the kernel. Arena agreement
+is executable evidence, not a new closed theorem for its complete result.
+
 - `HmaGraph.live_exact` and `interaction_exact` connect the pair/interaction
   rules to the original HMA definitions through the existing upstream
   all-premise `Qualification.Derives` relation.
@@ -124,10 +146,13 @@ The boundaries below remain explicit:
 - The Python solver, incremental transition code, input adapters, serialization
   and execution toolchain are checked implementations. No theorem quantifies
   over every execution of those programs.
-- Mathematical mixed row-update correctness fixes the behavior function and
-  instance skeleton. Runtime behavior replacement, edge/weight changes and
-  schema rebase are checked against fresh Lean instances. Schema rebases and
-  checkpoint restoration rebuild instead of reusing stale mask positions.
+- The earlier abstract mixed-row model fixes its behavior function. The new
+  executable Lean layer proves transfer across behavior changes on retained
+  rows, carries proofs through replacement and edge/weight edits, and admits
+  heterogeneous schema rebase by reconstruction. Actual Python operations
+  remain checked executions. There is no universal theorem that every
+  schema-compatible reconciliation request is accepted; every accepted Lean
+  result is certified, and the batch `solve` is total for its stated premises.
 - The ordered sequence adapter rejects duplicate deliveries. It does not
   implement the separate distributed admission protocol with idempotent
   delivery, permanent identity tombstones, arbitrary merge order, durable

@@ -43,6 +43,12 @@ engaged hyperedge.
   checker; they do not prove the external solver or decoder correct.
 - [solver/README.md](solver/README.md) — input/output contract, commands,
   checking mechanism, results, and the not-landed / cannot-say list.
+- proof/ExecutableWitness.lean, CertifiedTable.lean, CertifiedReplay.lean —
+  the actual materialized Lean witness engine, complete result renderer, and
+  carried certification/replay protocol, with correctness proofs. The Python
+  implementation is checked against this executed reference as well as the
+  original definitions. Concrete incremental kernel certificates validate
+  supplied cache transitions and complete supplied outputs.
 - [solver/arena/README.md](solver/arena/README.md) — exact source pin,
   reproducible arena extraction, and lossless table encoding.
 
@@ -135,6 +141,23 @@ checkpoint suffix equivalence, and sequence fencing in the mathematical model.
 `proof/IncrementalCounts.lean` proves exact subset, affected-cone and cumulative
 pair counts. The Python implementation remains checked against those definitions;
 it is not universally proved by these mathematical results.
+
+The materialized Lean backend closes the separate implementation gap:
+`ExecutableWitness.lean` proves its actual `Std.HashMap` transitions,
+including behavior-compatible reuse, current-support bounds and reconstruction
+equivalence. `CertifiedTable.lean` proves its complete returned structure and
+lexicographic tie-break. `CertifiedReplay.lean` carries those proofs with each
+state and checks that active rows reconstruct the requested input before
+returning a result. It also covers schema changes between different finite
+carrier types and the sequence/epoch boundary.
+
+```sh
+LEAN=lean python3 solver/certified.py solver/instances/X.json
+```
+
+This command cold-builds the backend and executes it twice, requiring exact
+byte agreement. See [solver/CERTIFIED-EXECUTION.md](solver/CERTIFIED-EXECUTION.md)
+for the proof chain, incremental certificate mechanism, and execution boundary.
 
 See [solver/INCREMENTAL-MODEL.md](solver/INCREMENTAL-MODEL.md) for exact theorem
 boundaries, costs, compaction, and empirical validation, and
