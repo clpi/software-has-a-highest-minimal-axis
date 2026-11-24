@@ -1,8 +1,16 @@
 Lean (version 4.19.0, x86_64-unknown-linux-gnu, commit 6caaee842e94, Release)
-Gate input sha256: 0afc45f0755c06a80dd2f0f595b86d4d5faa41a36177c9276520c68a4fe7fd3b
+Gate input sha256: 524159f72958b97381694119fbe0c9f0dac3db97954b0bb7d0f3e8599cf9ccc9
 Hypergraph source pin: PASS (4 byte-identical modules at software-optimality@0bbc1f3b8aa3)
-Source coverage: 18 Lean files; 337 theorem/lemma declarations; escape scan PASS
+Source coverage: 29 Lean files; 580 theorem/lemma declarations; escape scan PASS
 Cold compilation: PASS (every Lean source; warnings as errors; isolated import path)
+'ControllerRefinement.acceptOutcome_budget' depends on axioms: [propext, Quot.sound]
+'ControllerRefinement.acceptOutcome_counters' depends on axioms: [propext, Quot.sound]
+'ControllerRefinement.acceptOutcome_refines' depends on axioms: [propext, Quot.sound]
+'ControllerRefinement.acceptOutcome_reprice' depends on axioms: [propext, Quot.sound]
+'ControllerRefinement.acceptOutcome_spentVector' depends on axioms: [propext, Quot.sound]
+'ControllerRefinement.replay_budget' depends on axioms: [propext, Quot.sound]
+'ControllerRefinement.replay_counters' depends on axioms: [propext, Quot.sound]
+'ControllerRefinement.weighted_addVector' depends on axioms: [propext, Quot.sound]
 'Ctl.danswer' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Ctl.dfullhighest' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Ctl.dnoproper' depends on axioms: [propext, Quot.sound]
@@ -288,6 +296,20 @@ Cold compilation: PASS (every Lean source; warnings as errors; isolated import p
 'HmaJoin.scoped_rho_delete' depends on axioms: [propext, Quot.sound]
 'HmaJoin.survives_of_witness' depends on axioms: [propext]
 'HmaJoin.witness_mono' does not depend on any axioms
+'HmaPareto.advance_selects' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HmaPareto.advanced_frontier_exact' depends on axioms: [propext, Quot.sound]
+'HmaPareto.advanced_hma_optimal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HmaPareto.candidates_exact' depends on axioms: [propext, Quot.sound]
+'HmaPareto.candidates_nonempty' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HmaPareto.ideal_weighted_objective' depends on axioms: [propext]
+'HmaPareto.identity_preserved' depends on axioms: [propext]
+'HmaPareto.minimum_preserves_engaged' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HmaPareto.objective_formula' depends on axioms: [propext]
+'HmaPareto.point_exact' depends on axioms: [propext, Quot.sound]
+'HmaPareto.qualifiedRows_cover' depends on axioms: [propext, Quot.sound]
+'HmaPareto.qualifiedRows_exact' depends on axioms: [propext]
+'HmaPareto.selected_hma_optimal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HmaPareto.start_selects' depends on axioms: [propext, Classical.choice, Quot.sound]
 'HmaReplay.accepted_advance_clock' depends on axioms: [propext, Classical.choice, Quot.sound]
 'HmaReplay.accepted_rebase_clock' depends on axioms: [propext, Classical.choice, Quot.sound]
 'HmaReplay.certified_hypergraph' depends on axioms: [propext, Quot.sound]
@@ -330,6 +352,212 @@ Cold compilation: PASS (every Lean source; warnings as errors; isolated import p
 'HypergraphIncremental.retracted_cycles_do_not_bootstrap' depends on axioms: [propext, Classical.choice, Quot.sound]
 'HypergraphIncremental.unaffected_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
 'HypergraphIncremental.unchanged_derivation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'IncrementalControl.Cache.top_exact' depends on axioms: [propext]
+'IncrementalControl.base_exact' depends on axioms: [propext]
+'IncrementalControl.build_cells' depends on axioms: [propext]
+'IncrementalControl.build_valid' depends on axioms: [propext, Quot.sound]
+'IncrementalControl.depends_false' depends on axioms: [propext, Quot.sound]
+'IncrementalControl.localSame_exact' depends on axioms: [propext, Quot.sound]
+'IncrementalControl.localSame_self' depends on axioms: [propext, Quot.sound]
+'IncrementalControl.lookup_materialize' depends on axioms: [propext]
+'IncrementalControl.outside_changes' depends on axioms: [propext, Quot.sound]
+'IncrementalControl.read_materialize' depends on axioms: [propext]
+'IncrementalControl.refresh_cells' depends on axioms: [propext, Quot.sound]
+'IncrementalControl.refresh_changes' depends on axioms: [propext]
+'IncrementalControl.refresh_same_changes' depends on axioms: [propext, Classical.choice, Quot.sound]
+'IncrementalControl.refresh_same_work' depends on axioms: [propext, Classical.choice, Quot.sound]
+'IncrementalControl.refresh_valid' depends on axioms: [propext, Quot.sound]
+'IncrementalControl.refresh_work_bound' depends on axioms: [propext, Quot.sound]
+'IncrementalControl.select_exact' depends on axioms: [propext, Quot.sound]
+'IncrementalControl.updateLayer_exact' depends on axioms: [propext, Quot.sound]
+'IncrementalControl.value_exact' depends on axioms: [propext]
+'IncrementalControl.value_optimal' depends on axioms: [propext, Quot.sound]
+'OnlineController.carried_optimal' depends on axioms: [propext, Quot.sound]
+'OnlineHma.carried_valid' depends on axioms: [propext, Quot.sound]
+'OnlineHma.checkpoint_clock' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OnlineHma.finRange_complete' depends on axioms: [propext]
+'OnlineHma.finRange_nodup' depends on axioms: [propext, Quot.sound]
+'OnlineHma.qualifiedRows_cover' depends on axioms: [propext]
+'OnlineHma.qualifiedRows_exact' depends on axioms: [propext]
+'OnlinePareto.cached_regions_exact' depends on axioms: [propext, Quot.sound]
+'OnlinePareto.carried_valid' depends on axioms: [propext, Quot.sound]
+'OnlinePareto.hma_start_qualified' depends on axioms: [propext, Quot.sound]
+'OnlinePareto.hma_update_qualified' depends on axioms: [propext, Quot.sound]
+'OnlinePareto.selectCurrent_eq' depends on axioms: [propext, Quot.sound]
+'OnlinePareto.selection_globally_optimal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OnlinePolicy.bounded_budget_congr' depends on axioms: [propext, Quot.sound]
+'OnlinePolicy.initialBudget_fits' depends on axioms: [propext, Quot.sound]
+'OnlinePolicy.initialPoint_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OnlinePolicy.mapped_value' depends on axioms: [propext]
+'OnlinePolicy.positive_session_total' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OnlinePolicy.reconstruct_accepts' depends on axioms: [propext, Quot.sound]
+'OnlinePolicy.rootAction_exists' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OnlinePolicy.root_outcome_feasible' depends on axioms: [propext, Quot.sound]
+'OnlinePolicy.selectedRecord_corresponds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OnlinePolicy.selectedRecord_exists' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OnlinePolicy.selected_bounded' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OnlinePolicy.selected_catalogue' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OnlinePolicy.selected_outcome_accepts' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OnlinePolicy.selected_policy_global' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OnlinePolicy.selected_prefix_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OnlinePolicy.within_budget_congr' depends on axioms: [propext, Quot.sound]
+'OptimalController.Controls.adaptation_beats_fixed' depends on axioms: [propext]
+'OptimalController.Controls.greedy_loses' depends on axioms: [propext]
+'OptimalController.Controls.parameter_changes_optimum' depends on axioms: [propext]
+'OptimalController.Controls.supported_observation_advances' depends on axioms: [propext]
+'OptimalController.Controls.unsupported_observation_rejected' depends on axioms: [propext]
+'OptimalController.advance_bound' depends on axioms: [propext]
+'OptimalController.advance_exact' depends on axioms: [propext]
+'OptimalController.advance_rejects_unsupported' depends on axioms: [propext]
+'OptimalController.advance_remaining' depends on axioms: [propext]
+'OptimalController.advance_zero' depends on axioms: [propext]
+'OptimalController.argmin_congr' depends on axioms: [propext, Quot.sound]
+'OptimalController.argmin_exists' depends on axioms: [propext]
+'OptimalController.argmin_none_iff' depends on axioms: [propext]
+'OptimalController.argmin_spec' depends on axioms: [propext, Quot.sound]
+'OptimalController.backup_congr' depends on axioms: [propext, Quot.sound]
+'OptimalController.backup_of_scores_eq' depends on axioms: [propext, Quot.sound]
+'OptimalController.backup_transfer' depends on axioms: [propext, Quot.sound]
+'OptimalController.continuation_optimal' depends on axioms: [propext, Quot.sound]
+'OptimalController.maximum_attained' depends on axioms: [propext]
+'OptimalController.maximum_congr' depends on axioms: [propext]
+'OptimalController.maximum_mono' depends on axioms: [propext]
+'OptimalController.maximum_upper' depends on axioms: [propext]
+'OptimalController.optimize_admissible' depends on axioms: [propext, Quot.sound]
+'OptimalController.optimize_attains' depends on axioms: [propext]
+'OptimalController.policy_optimal' depends on axioms: [propext, Quot.sound]
+'OptimalController.replay_append' depends on axioms: [propext]
+'OptimalController.replay_bound' depends on axioms: [propext]
+'OptimalController.replay_remaining' depends on axioms: [propext, Quot.sound]
+'OptimalController.selectAction_spec' depends on axioms: [propext, Quot.sound]
+'OptimalController.selected_outcome_bound' depends on axioms: [propext]
+'OptimalController.selected_worst_attained' depends on axioms: [propext, Quot.sound]
+'OptimalController.value_optimal' depends on axioms: [propext, Quot.sound]
+'OptimalController.value_param_mono' depends on axioms: [propext, Quot.sound]
+'OptimalController.value_succ' does not depend on any axioms
+'OptimalController.value_zero' does not depend on any axioms
+'OptimalController.weighted_add' depends on axioms: [propext, Quot.sound]
+'OptimalController.weighted_mono' does not depend on any axioms
+'OptimalController.weighted_weights_mono' does not depend on any axioms
+'OptimalController.worst_param_mono' depends on axioms: [propext]
+'ParametricPareto.append_comparison_work' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ParametricPareto.append_retained' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ParametricPareto.append_work_telescopes' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ParametricPareto.best_le_left' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ParametricPareto.best_le_right' depends on axioms: [propext]
+'ParametricPareto.best_mem' depends on axioms: [propext]
+'ParametricPareto.build_storage' depends on axioms: [propext]
+'ParametricPareto.build_valid' depends on axioms: [propext, Quot.sound]
+'ParametricPareto.certified_frontier' depends on axioms: [propext, Quot.sound]
+'ParametricPareto.certified_selection' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ParametricPareto.choose_correct' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ParametricPareto.choose_none' depends on axioms: [propext]
+'ParametricPareto.choose_order_congr' depends on axioms: [propext]
+'ParametricPareto.comparison_partition' depends on axioms: [propext, Quot.sound]
+'ParametricPareto.dominates_total' depends on axioms: [propext, Quot.sound]
+'ParametricPareto.dominates_weaklyLE' depends on axioms: [propext, Quot.sound]
+'ParametricPareto.dominates_weighted' depends on axioms: [propext, Quot.sound]
+'ParametricPareto.evaluate_difference' depends on axioms: [propext, Quot.sound]
+'ParametricPareto.every_prefix_exact' depends on axioms: [propext, Quot.sound]
+'ParametricPareto.filter_pair_product' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ParametricPareto.filter_partition' depends on axioms: [propext, Quot.sound]
+'ParametricPareto.frontier_coverage' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ParametricPareto.frontier_exact' depends on axioms: [propext, Quot.sound]
+'ParametricPareto.frontier_nonempty' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ParametricPareto.frontier_original' depends on axioms: [propext, Quot.sound]
+'ParametricPareto.frontier_retains_equal_identities' depends on axioms: [propext, Quot.sound]
+'ParametricPareto.frontier_selected_optimal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ParametricPareto.keyLE_primary' depends on axioms: [propext, Quot.sound]
+'ParametricPareto.keyLE_refl' depends on axioms: [propext]
+'ParametricPareto.keyLE_total' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ParametricPareto.keyLE_trans' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ParametricPareto.mem_pairs' depends on axioms: [propext, Quot.sound]
+'ParametricPareto.needed_square' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ParametricPareto.nonempty_frontier_selects' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ParametricPareto.nonempty_selects' depends on axioms: [propext]
+'ParametricPareto.pairs_length' depends on axioms: [propext]
+'ParametricPareto.parameter_scale_invariant' depends on axioms: [propext, Quot.sound]
+'ParametricPareto.parametric_every_prefix' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ParametricPareto.positive_mul_lt_iff' depends on axioms: [propext, Quot.sound]
+'ParametricPareto.read_cells' depends on axioms: [propext]
+'ParametricPareto.reconcile_cells_current' depends on axioms: [propext, Quot.sound]
+'ParametricPareto.reconcile_frontier' depends on axioms: [propext, Quot.sound]
+'ParametricPareto.reconcile_keys' depends on axioms: [propext, Quot.sound]
+'ParametricPareto.reconcile_recomputes' depends on axioms: [propext]
+'ParametricPareto.reconcile_reuses' depends on axioms: [propext]
+'ParametricPareto.reconcile_storage' depends on axioms: [propext]
+'ParametricPareto.reconcile_valid' depends on axioms: [propext, Quot.sound]
+'ParametricPareto.region_exact' depends on axioms: [propext, Quot.sound]
+'ParametricPareto.region_member_exact' depends on axioms: [propext, Quot.sound]
+'ParametricPareto.region_points' depends on axioms: [propext, Quot.sound]
+'ParametricPareto.region_storage' depends on axioms: [propext, Quot.sound]
+'ParametricPareto.regions_cover_parameters' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ParametricPareto.replay_valid' depends on axioms: [propext, Quot.sound]
+'ParametricPareto.retraction_no_comparisons' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ParametricPareto.reused_square' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ParametricPareto.reused_value_exact' depends on axioms: [propext]
+'ParametricPareto.scaled_key_order' depends on axioms: [propext, Quot.sound]
+'ParametricPareto.schema_change_recomputes' depends on axioms: [propext, Quot.sound]
+'ParametricPareto.selected_nondominated' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ParametricPareto.selected_on_frontier' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ParametricPareto.selected_region_accepts' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ParametricPareto.selected_weighted_optimal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ParametricPareto.sum_monotone' depends on axioms: [propext]
+'ParametricPareto.sum_strict' depends on axioms: [propext, Quot.sound]
+'ParametricPareto.unchanged_no_comparisons' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ParametricPareto.unsupported_region_zero_only' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ParametricPareto.weaklyLE_exact' depends on axioms: [propext, Quot.sound]
+'ParametricPareto.weaklyLE_refl' depends on axioms: [propext, Quot.sound]
+'ParametricPareto.weaklyLE_trans' depends on axioms: [propext, Quot.sound]
+'ParametricPareto.weighted_scale' depends on axioms: [propext, Quot.sound]
+'ParetoPolicy.admissible_exact' depends on axioms: [propext, Quot.sound]
+'ParetoPolicy.all_congr' depends on axioms: [propext]
+'ParetoPolicy.assignments_complete' depends on axioms: [propext, Quot.sound]
+'ParetoPolicy.assignments_count' depends on axioms: [propext, Quot.sound]
+'ParetoPolicy.bounded_catalogue_complete' depends on axioms: [propext, Quot.sound]
+'ParetoPolicy.bounded_catalogue_sound' depends on axioms: [propext, Quot.sound]
+'ParetoPolicy.bounded_frontier_nondominated' depends on axioms: [propext, Quot.sound]
+'ParetoPolicy.budget_continuation' depends on axioms: [propext, Quot.sound]
+'ParetoPolicy.budget_continuation_exists' depends on axioms: [propext, Quot.sound]
+'ParetoPolicy.budget_downward_closed' depends on axioms: [propext, Quot.sound]
+'ParetoPolicy.budget_ledger_step' depends on axioms: [propext, Quot.sound]
+'ParetoPolicy.cache_catalogue_exact' depends on axioms: [propext]
+'ParetoPolicy.cache_length' depends on axioms: [propext]
+'ParetoPolicy.cache_record_lookup' depends on axioms: [propext, Quot.sound]
+'ParetoPolicy.catalogue_complete' depends on axioms: [propext, Quot.sound]
+'ParetoPolicy.catalogue_lookup' depends on axioms: [propext, Quot.sound]
+'ParetoPolicy.catalogue_nonempty' depends on axioms: [propext, Quot.sound]
+'ParetoPolicy.catalogue_sound' depends on axioms: [propext, Quot.sound]
+'ParetoPolicy.flatMap_congr' depends on axioms: [propext]
+'ParetoPolicy.flatMap_constant_length' depends on axioms: [propext, Quot.sound]
+'ParetoPolicy.materialize_valid' depends on axioms: [propext]
+'ParetoPolicy.point_cost' depends on axioms: [propext]
+'ParetoPolicy.point_within' depends on axioms: [propext, Quot.sound]
+'ParetoPolicy.policies_complete' depends on axioms: [propext, Quot.sound]
+'ParetoPolicy.policies_count_step' depends on axioms: [propext, Quot.sound]
+'ParetoPolicy.policy_choice_exists' depends on axioms: [propext, Quot.sound]
+'ParetoPolicy.policy_frontier_exact' depends on axioms: [propext, Quot.sound]
+'ParetoPolicy.profiles_partition' depends on axioms: [propext, Quot.sound]
+'ParetoPolicy.qualified_exact' depends on axioms: [propext, Quot.sound]
+'ParetoPolicy.qualified_nonempty' depends on axioms: [propext, Quot.sound]
+'ParetoPolicy.reconcile_policy_frontier' depends on axioms: [propext, Quot.sound]
+'ParetoPolicy.refresh_cache_exact' depends on axioms: [propext, Quot.sound]
+'ParetoPolicy.refresh_exact' depends on axioms: [propext, Quot.sound]
+'ParetoPolicy.refresh_length' depends on axioms: [propext]
+'ParetoPolicy.refresh_recomputes' depends on axioms: [propext]
+'ParetoPolicy.refresh_reuses' depends on axioms: [propext]
+'ParetoPolicy.refreshed_catalogue_exact' depends on axioms: [propext, Quot.sound]
+'ParetoPolicy.reusable_admissible' depends on axioms: [propext, Quot.sound]
+'ParetoPolicy.reusable_children' depends on axioms: [propext, Quot.sound]
+'ParetoPolicy.reusable_profile' depends on axioms: [propext, Quot.sound]
+'ParetoPolicy.reusable_sources' depends on axioms: [propext, Quot.sound]
+'ParetoPolicy.reusable_worst' depends on axioms: [propext, Quot.sound]
+'ParetoPolicy.sameSource_branch' depends on axioms: [propext, Quot.sound]
+'ParetoPolicy.sameSource_refl' depends on axioms: [propext, Quot.sound]
+'ParetoPolicy.selected_policy_optimal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ParetoPolicy.state_valid' depends on axioms: [propext, Quot.sound]
+'ParetoPolicy.unchanged_no_profiles' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ParetoPolicy.within_exact' depends on axioms: [propext, Quot.sound]
 'Qualification.closed' does not depend on any axioms
 'Qualification.compounding' does not depend on any axioms
 'Qualification.idempotent' does not depend on any axioms
@@ -340,10 +568,25 @@ Cold compilation: PASS (every Lean source; warnings as errors; isolated import p
 'Qualification.soundness' does not depend on any axioms
 'Qualification.surviving_subsystem' does not depend on any axioms
 'Qualification.withdrawal_no_new_support' does not depend on any axioms
+'ReasoningControls.all_adaptive_tree_count' depends on axioms: [propext]
+'ReasoningControls.chain_value' depends on axioms: [propext, Quot.sound]
+'ReasoningControls.changed_chain_value' depends on axioms: [propext, Quot.sound]
+'ReasoningControls.dependency_cone_cells' depends on axioms: [propext, Quot.sound]
+'ReasoningControls.equal_profiles_keep_identities' depends on axioms: [propext, Quot.sound]
+'ReasoningControls.original_x_choice_preserved' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ReasoningControls.scalar_worst_prefers_zero' depends on axioms: [propext]
+'ReasoningControls.unchanged_chain_zero_work' depends on axioms: [propext, Quot.sound]
+'ReasoningControls.vector_worst_prefers_one' depends on axioms: [propext]
+'ReasoningControls.withdrawal_reuses_all_comparisons' depends on axioms: [propext, Quot.sound]
+'ReasoningControls.withdrawn_dominators_resurrect' depends on axioms: [propext, Quot.sound]
+'ReasoningControls.x_complete_parametric_frontier' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ReasoningControls.x_liveness_parameter' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ReasoningControls.x_resource_parameter' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ReasoningControls.zero_parameters_stay_pareto' depends on axioms: [propext, Quot.sound]
 Original proof baseline: PASS (58/58; Hma.lean and Controls.lean byte-identical; per-theorem axioms unchanged)
-Axiom subset check: PASS (337/337; subset of {propext, Classical.choice, Quot.sound})
-Environment audit: PASS (756 theorem constants including 419 generated helpers; zero custom logical axioms)
-Compiler metadata: 182 generated unsafe placeholders; none in theorem dependencies
+Axiom subset check: PASS (580/580; subset of {propext, Classical.choice, Quot.sound})
+Environment audit: PASS (1382 theorem constants including 802 generated helpers; zero custom logical axioms)
+Compiler metadata: 903 generated unsafe placeholders; none in theorem dependencies
 GATE ATTACK CONTROL: PASS (unused metaprogram-generated logical axiom rejected)
 ARENA SOURCE PASS: 1152 rows; compact bytes match; original observation SHA256 d8719eba53bd3f0143a37597f6c1c555b6c8042adadf987890347041c2bcb865; lossless interning checked
 INSTANCE D: PASS; subsets=8; rows=2; chosen=['a', 'b', 'c']; rho=[1, 2]; minimal=['a', 'b', 'c']:[1, 2]
@@ -436,8 +679,8 @@ PASS s3 d.json: incremental result equals solver.py's from scratch at every one 
 PASS s3 e-empty.json: incremental result equals solver.py's from scratch at every one of 1 row-append prefixes (full JSON result)
 PASS s3 e-singleton.json: incremental result equals solver.py's from scratch at every one of 2 row-append prefixes (full JSON result)
 PASS s3 x.json: incremental result equals solver.py's from scratch at every one of 9 row-append prefixes (full JSON result)
-PASS s3 synthetic-dense 6 axes, 200 -> 220 rows: join computed 4190 new pairs vs 24090 from scratch, re-measured 0 of 64 subsets; agrees with solver.py (wall 7.0 ms vs 38.5 ms, single run, indicative)
-PASS s3 synthetic-binary 6 axes, 40 -> 60 rows: join computed 990 new pairs vs 1770 from scratch, re-measured 0 of 64 subsets; agrees with solver.py (wall 2.1 ms vs 5.4 ms, single run, indicative)
+PASS s3 synthetic-dense 6 axes, 200 -> 220 rows: join computed 4190 new pairs vs 24090 from scratch, re-measured 0 of 64 subsets; agrees with solver.py (wall 8.2 ms vs 45.6 ms, single run, indicative)
+PASS s3 synthetic-binary 6 axes, 40 -> 60 rows: join computed 990 new pairs vs 1770 from scratch, re-measured 0 of 64 subsets; agrees with solver.py (wall 3.2 ms vs 7.1 ms, single run, indicative)
 PASS s3 staged: 20 rows that first vary axis f re-measure 24 subsets, all containing f (at most 32 can); agrees with solver.py
 PASS s3 two-axis: a join re-measures 2 of 4 subsets ({b} and {a,b}; the empty subset can never be live, so 3 of 4 is the maximum, not evidence of scoping); agrees with solver.py
 PASS s3 d.json: withdrawing rows one by one back to empty agrees with solver.py after every step
@@ -455,4 +698,37 @@ GATE: PASS (19 checks, 0 failed)
 AXIS BOUNDARY PASS: 56 ownership/schema controls; rejected batches atomic; retained input and table exports detached; valid retries agree with solver
 axis: 300 random tables x 100 operations, compared with solver.solve after every operation
 FUZZ s3: PASS (0 disagreements)
-GATE PASS: original proof baseline, materialized Lean transitions and complete renderer, kernel-checked incremental certificates, hypergraph/replay/counting proofs, all prefix outcomes, reconstruction, cumulative work, exponential controls, and byte-exact determinism
+ONLINE EXECUTABLE: PASS (one fixed binary; runtime inputs; no campaign-specific compilation)
+ONLINE X: 17 prefixes; one fixed process; current counts/output=EXACT; raw bytes=EXACT
+ONLINE D: 5 prefixes; one fixed process; current counts/output=EXACT; raw bytes=EXACT
+ONLINE E-empty: 1 prefixes; one fixed process; current counts/output=EXACT; raw bytes=EXACT
+ONLINE E-singleton: 4 prefixes; one fixed process; current counts/output=EXACT; raw bytes=EXACT
+ONLINE arena: 6 prefixes; one fixed process; current counts/output=EXACT; raw bytes=EXACT
+ONLINE tie: 11 prefixes; one fixed process; current counts/output=EXACT; raw bytes=EXACT
+ONLINE typed-weighted: 11 prefixes; one fixed process; current counts/output=EXACT; raw bytes=EXACT
+ONLINE empty-universe: 4 prefixes; one fixed process; current counts/output=EXACT; raw bytes=EXACT
+ONLINE schema-rebase: 4 prefixes; one fixed process; current counts/output=EXACT; raw bytes=EXACT
+ONLINE mixed-36: 37 prefixes; one fixed process; current counts/output=EXACT; raw bytes=EXACT
+ONLINE exponential-1: 2 prefixes; one fixed process; current counts/output=EXACT; raw bytes=EXACT
+ONLINE exponential-2: 2 prefixes; one fixed process; current counts/output=EXACT; raw bytes=EXACT
+ONLINE exponential-3: 2 prefixes; one fixed process; current counts/output=EXACT; raw bytes=EXACT
+ONLINE exponential-4: 2 prefixes; one fixed process; current counts/output=EXACT; raw bytes=EXACT
+ONLINE GATE PASS: 14 campaigns; 108 prefixes; compiled once, no future inputs, one native session per campaign; exact state/output; raw determinism, transactional refusal and checkpoint suffixes PASS
+PARETO GATE PASS: 90 online prefixes; original-HMA profiles, complete frontiers, all-parameter linear regions, unsupported Pareto points, resurrection, exact incremental comparisons, atomic refusals, latent output controls, fresh-process raw bytes EXACT
+CONTROLLER GATE PASS: 75 online prefixes; all adaptive policies checked; 10 malformed/outcome/clock attacks rejected atomically; dependency propagation, zero-work reuse, cumulative costs, reconstruction and raw byte determinism PASS
+POLICY parametric-nonconvex-retraction: PASS; prefixes=12; refusals=10; raw bytes EXACT
+POLICY new-supported-outcome: PASS; prefixes=3; refusals=2; raw bytes EXACT
+POLICY max-before-weight: PASS; prefixes=2; refusals=0; raw bytes EXACT
+POLICY full-history-adaptation: PASS; prefixes=4; refusals=0; raw bytes EXACT
+POLICY nongreedy-horizon: PASS; prefixes=3; refusals=0; raw bytes EXACT
+POLICY zero-dimension: PASS; prefixes=3; refusals=0; raw bytes EXACT
+POLICY zero-horizon: PASS; prefixes=3; refusals=2; raw bytes EXACT
+POLICY GATE PASS: 7 campaigns; 30 prefixes; 14 refusals; every adaptive policy/profile/frontier/selection/dependency/work field agrees; two-process raw bytes EXACT
+AUTONOMOUS single-batch: batches=[8]; all schedules/frontier/weighted optimum within committed bounds=EXACT; full X qualified; measured pairs=28; raw bytes=EXACT
+AUTONOMOUS balanced: batches=[2, 3, 3]; all schedules/frontier/weighted optimum within committed bounds=EXACT; full X qualified; measured pairs=28; raw bytes=EXACT
+AUTONOMOUS zero-weights: batches=[2, 3, 3]; all schedules/frontier/weighted optimum within committed bounds=EXACT; full X qualified; measured pairs=28; raw bytes=EXACT
+AUTONOMOUS weighted-tie: batches=[2, 3, 3]; all schedules/frontier/weighted optimum within committed bounds=EXACT; full X qualified; measured pairs=28; raw bytes=EXACT
+AUTONOMOUS reparameterized: batches=[2, 3, 3]; all schedules/frontier/weighted optimum within committed bounds=EXACT; full X qualified; measured pairs=28; raw bytes=EXACT
+AUTONOMOUS GATE PASS: 5 parameter regimes; 15 decisions; complete initial optimum and Pareto/weighted-optimal budget-feasible continuations; real online HMA execution and original-definition agreement; validated outcomes before admission; parameter-only evidence reuse; byte-exact replay
+REASONING CERTIFICATE GATE PASS: 6 concrete outputs kernel-checked; 6 false nearby receipts rejected by kernel reduction; standard dependencies only
+GATE PASS: original proof baseline, materialized Lean transitions and complete renderer, kernel-checked incremental certificates, hypergraph/replay/counting proofs, online HMA, complete Pareto frontiers and parameter regions, incremental adaptive-policy certificates, globally optimal bounded controllers, empirical autonomous qualification, reconstruction, cumulative work, exponential controls, and byte-exact determinism

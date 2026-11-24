@@ -242,8 +242,32 @@ def main() -> int:
                         emit(line.rstrip("\n"))
                     require(process.wait() == 0, "Solver validation gate failed: " + Path(command[1]).name)
 
+            # One fixed executable is compiled before any online request is read.
+            # Every lane shares this exact executable and the cold proof closure.
+            native = build / "reasoning-native"
+            native.mkdir()
+            builder = subprocess.run([sys.executable, str(ROOT / "solver/reasoning.py"),
+                "hma", "--lean", lean, "--lean-dir", str(build), "--build-only", str(native)],
+                cwd=ROOT, env=env, text=True, capture_output=True, timeout=480)
+            require(builder.returncode == 0, "Fixed online executable build failed:\n" +
+                    builder.stdout + builder.stderr)
+            binary = native / "hma-reasoning"
+            require(binary.is_file() and builder.stdout.strip() == str(binary),
+                    "Unexpected online executable receipt")
+            env["HMA_REASONING_BINARY"] = str(binary)
+            emit("ONLINE EXECUTABLE: PASS (one fixed binary; runtime inputs; no campaign-specific compilation)")
+            for filename in ("online_check.py", "pareto_check.py", "controller_check.py", "policy_check.py",
+                             "autonomous_check.py", "reasoning_certificate_check.py"):
+                command = [sys.executable, str(ROOT / "solver" / filename)]
+                with subprocess.Popen(command, cwd=ROOT, env=env, text=True, stdout=subprocess.PIPE,
+                                      stderr=subprocess.STDOUT, bufsize=1) as process:
+                    require(process.stdout is not None, "Missing online validation stream")
+                    for line in process.stdout:
+                        emit(line.rstrip("\n"))
+                    require(process.wait() == 0, "Online reasoning gate failed: " + filename)
+
         require(digest_inputs() == input_digest, "Gate inputs changed during validation")
-        emit("GATE PASS: original proof baseline, materialized Lean transitions and complete renderer, kernel-checked incremental certificates, hypergraph/replay/counting proofs, all prefix outcomes, reconstruction, cumulative work, exponential controls, and byte-exact determinism")
+        emit("GATE PASS: original proof baseline, materialized Lean transitions and complete renderer, kernel-checked incremental certificates, hypergraph/replay/counting proofs, online HMA, complete Pareto frontiers and parameter regions, incremental adaptive-policy certificates, globally optimal bounded controllers, empirical autonomous qualification, reconstruction, cumulative work, exponential controls, and byte-exact determinism")
         return 0
     except (RuntimeError, OSError, ValueError, subprocess.SubprocessError) as error:
         emit("REJECTED: " + str(error))

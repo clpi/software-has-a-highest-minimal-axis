@@ -182,10 +182,13 @@ to its input files during validation.
 
 The universal theorems concern the actual Lean pure functions and their stated
 finite-input premises. Python execution and byte encoding remain checked
-implementations. The command compiles a supplied finite campaign ahead of
-execution, including its input tables. The state-storage theorem does not
-bound the whole generated binary or Python staging process by current-state
-size, and this command is not an online streaming service. Arena output is
+implementations. The older `certified.py` command compiles a supplied finite
+campaign ahead of execution, including its input tables. Its state-storage
+theorem does not bound that whole generated binary or Python staging process
+by current-state size. The additional fixed executable in
+[PARAMETRIC-REASONING.md](PARAMETRIC-REASONING.md) accepts online requests after
+compilation and carries the same certified current state without receiving
+future campaign inputs. Arena output is
 evidence for the pinned executable model and
 specified instance, not physical-world or all-seed validity. Reconstruction
 does not authenticate invented measurements or recover discarded historical

@@ -14,13 +14,17 @@ engaged hyperedge.
 
 ## Contents
 
+- [solver/PARAMETRIC-REASONING.md](solver/PARAMETRIC-REASONING.md) — persistent
+  online execution, exact Pareto frontiers and all-parameter regions, incrementally
+  recertified finite-horizon control, complete frontiers of budget-feasible
+  adaptive policies, and empirical autonomous qualification.
 - SPEC.md — the object, defined at agent proof
   resolution: the universe, variation and liveness, the
   emergence measure and the refinement vector,
   sufficiency, minimality and highest minimality, the
   induced transformation, the named Instances X, D, and
   E, the solver contract, and the theorem list.
-- proof/ — the Lean core: 58 theorems (the finite list
+- proof/ — the founding Lean core: 58 theorems (the finite list
   machinery, monotonicity L1, structure forcing L2,
   existence T1, minimality T2, maximality and rho
   uniqueness T3, functoriality T4, the degenerate
@@ -158,6 +162,26 @@ LEAN=lean python3 solver/certified.py solver/instances/X.json
 This command cold-builds the backend and executes it twice, requiring exact
 byte agreement. See [solver/CERTIFIED-EXECUTION.md](solver/CERTIFIED-EXECUTION.md)
 for the proof chain, incremental certificate mechanism, and execution boundary.
+
+## Online parametric decisions
+
+The fixed native reasoning executable reads new inputs and observations while
+retaining the proved materialized state. It includes exact catalogue Pareto
+frontiers, symbolic linear parameter regions, a globally optimal finite-horizon
+scalar controller with materialized dependency updates, and complete adaptive
+policy Pareto frontiers. The policy lane carries remaining component budgets so
+continuous replanning preserves its initial vector commitment.
+
+```sh
+LEAN=lean python3 solver/reasoning.py policy < requests.jsonl
+```
+
+`HmaPareto.lean` connects the resource view directly to the certified HMA renderer
+and original minimality/liveness definitions. The autonomous gate executes
+selected batch actions against the real HMA runtime, checks the empirical result
+and pair-work receipt, then admits the outcome. It covers every batch-size policy
+within its explicit finite horizon. See the [reasoning contract](solver/PARAMETRIC-REASONING.md)
+for exact objectives, counting laws, protocol, proofs, and boundaries.
 
 See [solver/INCREMENTAL-MODEL.md](solver/INCREMENTAL-MODEL.md) for exact theorem
 boundaries, costs, compaction, and empirical validation, and
